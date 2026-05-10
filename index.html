@@ -355,7 +355,17 @@ section {
   line-height:1.7;
   opacity:0.75;
 }
- 
+ .nav-logo-img {
+  height: 60px;
+  width: auto;
+}
+ .hero-logo {
+  width: clamp(300px, 60%, 600px);
+  height: auto;
+  filter: drop-shadow(0 0 15px #ff70f3)
+          drop-shadow(0 0 30px #ff00ea);
+  margin-bottom: 30px;
+}
 /* SUPPORT */
 .support-section {
   text-align:center;
@@ -431,7 +441,7 @@ footer {
  
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">Bad Rabbit Studio</div>
+  <img src="assets/images/logowords2.png" alt="Bad Rabbit Studio" class="nav-logo-img">
   <ul class="nav-links">
     <li><a href="#shows">Shows</a></li>
     <li><a href="#about">About</a></li>
@@ -442,8 +452,7 @@ footer {
 <!-- HERO -->
 <div class="hero">
   <p class="hero-eyebrow">✦ Welcome to ✦</p>
-  <h1 class="hero-title">Bad Rabbit</h1>
-  <h2 class="hero-subtitle">Studio</h2>
+  <img src="assets/images/logowords2.png" alt="Bad Rabbit Studio" class="hero-logo">
   <p class="hero-desc">An independent animation studio built different. Bold stories, no compromise, no holding back.</p>
   <div class="hero-buttons">
     <a href="#shows" class="btn btn-primary">Our Shows</a>
