@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 - Lost</title>
+
+<style>
+:root {
+  --dk-color:#7f0074;
+  --mid-color:#9f0092;
+  --lt-color:#ff70f3;
+  --dkest-color:#270024;
+  --accent:#28aeff;
+}
+
+/* BASE */
+body {
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  background:#1f0016;
+  font-family:strawberrymuffins;
+  color:#ffb4f9;
+
+  overflow:hidden;
+
+  animation: flicker 6s infinite;
+}
+
+/* MAIN BOX */
+.error-container {
+  width:70%;
+  max-width:800px;
+
+  padding:3%;
+  text-align:center;
+
+  background:#580050;
+  border:20px solid transparent;
+  border-image:url("border5.png") 30 stretch;
+
+  border-radius:20px;
+
+  box-shadow:
+    0 0 10px #ff70f3,
+    0 0 20px #ff00ea,
+    inset 0 0 15px rgba(255,112,243,0.5);
+
+  transform: scale(1.02);
+}
+
+/* 404 TEXT */
+.error-code {
+  font-size:8vw;
+
+  color:#ff70f3;
+
+  text-shadow:
+    0 0 10px #ff70f3,
+    0 0 20px #ff00ea,
+    0 0 40px #ff00ea;
+
+  margin:0;
+
+  animation: glitch 1s infinite;
+}
+
+/* MAIN TEXT */
+.error-text {
+  font-size:2em;
+  margin-top:2%;
+  font-weight:bold;
+}
+
+/* SUBTEXT */
+.error-subtext {
+  opacity:0.7;
+  margin-bottom:3%;
+}
+
+/* CHANGING TEXT */
+#creepyText {
+  font-size:1.2em;
+  margin-bottom:5%;
+
+  color:#ff6bf2;
+
+  text-shadow:0 0 8px #ff70f3;
+
+  transition: opacity 0.3s;
+}
+
+/* BUTTON */
+.escape-button {
+  display:inline-block;
+
+  padding:15px 30px;
+
+  background:#580050;
+  color:#ffb4f9;
+
+  text-decoration:none;
+  font-weight:bold;
+
+  border:2px solid #ff70f3;
+  border-radius:10px;
+
+  box-shadow:
+    0 0 10px #ff70f3,
+    0 0 20px #ff00ea;
+
+  transition:0.3s;
+}
+
+.escape-button:hover {
+  transform: scale(1.1);
+
+  box-shadow:
+    0 0 20px #ff70f3,
+    0 0 40px #ff00ea;
+}
+
+/* GLITCH */
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-3px, 2px); }
+  40% { transform: translate(3px, -2px); }
+  60% { transform: translate(-2px, 1px); }
+  80% { transform: translate(2px, -1px); }
+  100% { transform: translate(0); }
+}
+
+/* SCREEN FLICKER */
+@keyframes flicker {
+  0%, 100% { opacity:1; }
+  95% { opacity:0.85; }
+  96% { opacity:0.3; }
+  97% { opacity:1; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="error-container">
+
+  <h1 class="error-code">404</h1>
+
+  <p class="error-text">You weren't supposed to find this page.</p>
+
+  <p class="error-subtext">...but now that you're here...</p>
+
+  <p id="creepyText"></p>
+
+  <a href="https://badrabbit.neocities.org/" class="escape-button">
+    TAKE ME BACK
+  </a>
+
+</div>
+
+<script>
+const messages = [
+  "you clicked something wrong",
+  "this page doesn't exist",
+  "or does it?",
+  "go back.",
+  "before it notices."
+];
+
+let i = 0;
+const text = document.getElementById("creepyText");
+
+function cycle() {
+  text.style.opacity = 0;
+
+  setTimeout(() => {
+    text.innerText = messages[i];
+    text.style.opacity = 1;
+    i = (i + 1) % messages.length;
+  }, 300);
+}
+
+setInterval(cycle, 3000);
+cycle();
+</script>
+
+</body>
+</html>
