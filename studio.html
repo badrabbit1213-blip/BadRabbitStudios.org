@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bad Rabbit Studio | About</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Creepster&family=Raleway:wght@400;600;700&display=swap');
+
+:root {
+  --dk-color:#7f0074;
+  --mid-color:#9f0092;
+  --lt-color:#ff70f3;
+  --dkest-color:#270024;
+  --accent:#28aeff;
+  --bg:#1f0016;
+  --text:#ffb4f9;
+  --card-bg:#580050;
+  --card-border:#ff70f3;
+
+ --tfts-yellow:  #ffbd59;
+  --tfts-cream:   #fff1cf;
+  --tfts-red:     #ff3d3a;
+  --tfts-darkred: #7b0100;
+  --tfts-brown:   #7d4a00;
+  --tfts-bg:      #3a1e00;
+  --tfts-card:    #2a1300;
+  
+  --proj-bg:      #1a0015;
+--proj-card:    #380030;
+--proj-header:  #270024;
+--proj-border:  #7f0074;
+--proj-hl:      #ff70f3;
+--proj-text:    #ffb4f9;
+--proj-badge:   #9f0092;
+}
+  
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  min-height:100vh;
+  background:var(--bg);
+  font-family:'Raleway', sans-serif;
+  color:var(--text);
+  overflow-x:hidden;
+  animation:flicker 8s infinite;
+}
+ 
+/* ── FALLING STARS ── */
+.star {
+  position:fixed; top:-20px;
+  color:#ffacf9;
+  animation:starFall 5s linear forwards;
+  z-index:0; pointer-events:none; font-size:12px;
+}
+@keyframes starFall {
+  0%   { transform:translateY(0) rotate(0deg); opacity:1; }
+  80%  { opacity:1; }
+  100% { transform:translateY(100vh) rotate(360deg); opacity:0; }
+}
+ 
+/* ── NAV ── */
+nav {
+  position:fixed; top:0; width:100%;
+  padding:16px 5%;
+  display:flex; justify-content:space-between; align-items:center;
+  background:rgba(31,0,22,0.92);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--dk-color);
+  box-shadow:0 0 20px rgba(255,112,243,0.2);
+  z-index:1000;
+}
+.nav-logo img {
+  height:50px; width:auto;
+  filter:drop-shadow(0 0 8px #ff70f3);
+  transition:0.3s;
+}
+.nav-logo img:hover { filter:drop-shadow(0 0 16px #ff00ea); transform:scale(1.05); }
+ 
+.nav-links { display:flex; gap:28px; list-style:none; }
+.nav-links a {
+  color:var(--text); text-decoration:none;
+  font-size:0.85em; letter-spacing:1px; text-transform:uppercase;
+  transition:0.3s; position:relative;
+}
+.nav-links a::after {
+  content:''; position:absolute; bottom:-4px; left:0;
+  width:0; height:1px;
+  background:var(--lt-color); box-shadow:0 0 8px var(--lt-color);
+  transition:0.3s;
+}
+.nav-links a:hover { color:var(--lt-color); text-shadow:0 0 8px var(--lt-color); }
+.nav-links a:hover::after, .nav-links a.active::after { width:100%; }
+.nav-links a.active { color:var(--lt-color); }
+ 
+.dropdown { position:relative; }
+.dropdown-menu {
+  display:none; position:absolute; top:100%; left:0;
+  background:var(--card-bg); border:1px solid var(--dk-color);
+  border-radius:8px; padding:8px 0; list-style:none;
+  min-width:180px;
+  box-shadow:0 0 10px #ff70f3, 0 0 20px rgba(255,0,234,0.3);
+  z-index:999;
+}
+.dropdown-menu li a {
+  display:block; padding:10px 20px;
+  color:var(--text); text-decoration:none;
+  font-size:0.85em; letter-spacing:1px; transition:0.2s;
+}
+.dropdown-menu li a:hover { color:var(--lt-color); text-shadow:0 0 8px var(--lt-color); background:rgba(255,112,243,0.1); }
+.dropdown:hover .dropdown-menu { display:block; }
+ 
+/* ── PAGE WRAPPER ── */
+.page {
+  padding:100px 5% 60px;
+  max-width:1200px;
+  margin:0 auto;
+  position:relative;
+  z-index:1;
+}
+ 
+/* ── PAGE TITLE ── */
+.page-title {
+  font-family:'Creepster', cursive;
+  font-size:clamp(2.5em, 6vw, 4em);
+  color:var(--lt-color);
+  text-shadow:0 0 10px #ff70f3, 0 0 30px #ff00ea;
+  text-align:center;
+  margin-bottom:8px;
+  animation:glitch 6s infinite;
+}
+.page-subtitle {
+  text-align:center; font-size:0.9em;
+  opacity:0.6; letter-spacing:3px;
+  text-transform:uppercase; margin-bottom:60px;
+}
+ 
+/* ── DIVIDER ── */
+.divider {
+  width:100%; height:1px;
+  background:linear-gradient(90deg, transparent, var(--dk-color), transparent);
+  box-shadow:0 0 10px var(--dk-color);
+  margin:50px 0;
+}
+ 
+/* ── SECTION LABEL ── */
+.section-label {
+  font-family:'Creepster', cursive;
+  font-size:clamp(1.5em, 3vw, 2.2em);
+  color:var(--lt-color);
+  text-shadow:0 0 10px #ff70f3;
+  margin-bottom:30px;
+  display:flex; align-items:center; gap:12px;
+}
+.section-label::after {
+  content:''; flex:1; height:1px;
+  background:linear-gradient(90deg, var(--dk-color), transparent);
+}
+ 
+/* ════════════════════════════════════════
+   STUDIO DESCRIPTION
+════════════════════════════════════════ */
+.studio-intro {
+  background:var(--card-bg);
+  border:2px solid var(--dk-color);
+  border-radius:16px;
+  padding:36px;
+  box-shadow:0 0 10px rgba(255,112,243,0.2), inset 0 0 20px rgba(255,112,243,0.05);
+  transition:0.3s;
+  margin-bottom:0;
+}
+.studio-intro:hover {
+  box-shadow:0 0 24px rgba(255,112,243,0.35), inset 0 0 30px rgba(255,112,243,0.08);
+}
+.studio-intro h2 {
+  font-family:'Creepster', cursive;
+  font-size:1.8em;
+  color:var(--lt-color);
+  text-shadow:0 0 8px #ff70f3;
+  margin-bottom:16px;
+}
+.studio-intro p {
+  font-size:0.95em; line-height:1.9; opacity:0.85; margin-bottom:14px;
+}
+.studio-intro p:last-child { margin-bottom:0; }
+.highlight {
+  color:var(--lt-color); text-shadow:0 0 6px #ff70f3; font-weight:700;
+  background:rgba(255,112,243,0.1); padding:2px 6px; border-radius:4px;
+}
+/* ════════════════════════════════════════
+   VALUES CARDS
+════════════════════════════════════════ */
+.values-grid {
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:20px;
+}
+ 
+.value-card {
+  background:var(--card-bg);
+  border:2px solid var(--dk-color);
+  border-radius:16px;
+  padding:28px 24px;
+  box-shadow:0 0 10px rgba(255,112,243,0.15);
+  transition:0.3s;
+  position:relative;
+  overflow:hidden;
+}
+.value-card::before {
+  content:''; position:absolute; top:0; left:0; right:0;
+  height:3px;
+  background:linear-gradient(90deg, var(--dk-color), var(--lt-color), var(--dk-color));
+  box-shadow:0 0 10px var(--lt-color);
+}
+.value-card:hover {
+  transform:translateY(-6px);
+  box-shadow:0 0 25px rgba(255,112,243,0.35);
+  border-color:var(--lt-color);
+}
+.value-card-icon { font-size:2em; margin-bottom:12px; display:block; }
+.value-card h3 {
+  font-family:'Creepster', cursive;
+  font-size:1.3em; color:var(--lt-color);
+  text-shadow:0 0 6px #ff70f3; margin-bottom:12px;
+}
+.value-card p { font-size:0.88em; line-height:1.7; opacity:0.8; }
+ 
+/* ════════════════════════════════════════
+   TOOLS
+════════════════════════════════════════ */
+.tools-row {
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+}
+ 
+.tool-chip {
+  background:var(--card-bg);
+  border:2px solid var(--dk-color);
+  border-radius:40px;
+  padding:10px 24px;
+  display:flex; align-items:center; gap:10px;
+  font-size:0.9em; font-weight:600;
+  color:var(--text);
+  box-shadow:0 0 8px rgba(255,112,243,0.15);
+  transition:0.3s;
+}
+.tool-chip:hover {
+  border-color:var(--lt-color);
+  color:var(--lt-color);
+  text-shadow:0 0 8px var(--lt-color);
+  box-shadow:0 0 16px rgba(255,112,243,0.3);
+  transform:translateY(-2px);
+}
+.tool-chip-icon { font-size:1.2em; }
+ 
+/* ════════════════════════════════════════
+   TEAM
+════════════════════════════════════════ */
+.team-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+  gap:20px;
+}
+ 
+.team-card {
+  background:var(--card-bg);
+  border:2px solid var(--dk-color);
+  border-radius:16px;
+  padding:28px 24px;
+  display:flex; align-items:center; gap:18px;
+  box-shadow:0 0 10px rgba(255,112,243,0.15);
+  transition:0.3s;
+}
+.team-card:hover {
+  border-color:var(--lt-color);
+  box-shadow:0 0 22px rgba(255,112,243,0.3);
+  transform:translateY(-4px);
+}
+.team-avatar {
+  width:58px; height:58px; border-radius:50%;
+  background:var(--dk-color);
+  border:2px solid var(--lt-color);
+  box-shadow:0 0 10px rgba(255,112,243,0.4);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Creepster', cursive;
+  font-size:1.3em; color:var(--lt-color);
+  flex-shrink:0;
+}
+.team-avatar img { width:100%; height:100%; border-radius:50%; object-fit:cover; }
+.team-info h3 {
+  font-family:'Creepster', cursive;
+  font-size:1.25em; color:var(--lt-color);
+  text-shadow:0 0 6px #ff70f3; margin-bottom:4px;
+}
+.team-role {
+  font-size:0.72em; letter-spacing:2px;
+  text-transform:uppercase; color:var(--accent);
+  text-shadow:0 0 6px var(--accent); margin-bottom:8px;
+  display:block;
+}
+.team-info p { font-size:0.85em; line-height:1.6; opacity:0.8; }
+ 
+/* ════════════════════════════════════════
+   TFTS PROJECT PANEL  (warm palette)
+════════════════════════════════════════ */
+.tfts-panel {
+  background:var(--tfts-card);
+  border:2px solid var(--tfts-brown);
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 0 30px rgba(255,189,89,0.15), 0 0 60px rgba(255,61,58,0.08);
+}
+ 
+/* banner header */
+.tfts-header {
+  background:var(--tfts-darkred);
+  border-bottom:2px solid var(--tfts-brown);
+  padding:14px 24px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  box-shadow:0 0 20px rgba(255,61,58,0.25);
+}
+.tfts-logo {
+  width:48px; height:48px;
+  border-radius:10px;
+  border:2px solid var(--tfts-brown);
+  object-fit:cover;
+  /* <img src="assets/images/tfts-logo.png"> goes here */
+  background:var(--tfts-brown);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Creepster', cursive;
+  font-size:0.65em; color:var(--tfts-yellow);
+  text-align:center;
+  flex-shrink:0;
+}
+.tfts-logo img { width:100%; height:100%; object-fit:cover; border-radius:8px; }
+.tfts-header-text h2 {
+  font-family:'Creepster', cursive;
+  font-size:1.6em;
+  color:var(--tfts-yellow);
+  text-shadow:0 0 12px rgba(255,189,89,0.6);
+  letter-spacing:1px;
+}
+.tfts-header-text span {
+  font-size:0.72em; letter-spacing:3px;
+  text-transform:uppercase; color:var(--tfts-cream);
+  opacity:0.7;
+}
+ 
+/* body */
+.tfts-body {
+  padding:28px 28px 32px;
+}
+ 
+/* status row */
+.tfts-status-row {
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:24px;
+  flex-wrap:wrap;
+}
+.tfts-status-badge {
+  background:var(--tfts-red);
+  color:var(--tfts-cream);
+  font-family:'Creepster', cursive;
+  font-size:0.9em;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  padding:6px 18px;
+  border-radius:30px;
+  box-shadow:0 0 12px rgba(255,61,58,0.5);
+}
+.tfts-status-text {
+  font-size:0.88em;
+  color:var(--tfts-cream);
+  opacity:0.85;
+  line-height:1.6;
+}
+ 
+/* top layout: description left, logo right */
+.tfts-top {
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:24px;
+  align-items:start;
+  margin-bottom:28px;
+}
+.tfts-description p {
+  font-size:0.9em;
+  color:var(--tfts-cream);
+  line-height:1.85;
+  opacity:0.9;
+  margin-bottom:10px;
+}
+.tfts-description p:last-child { margin-bottom:0; }
+.tfts-description .tfts-hl {
+  color:var(--tfts-yellow);
+  font-weight:700;
+  text-shadow:0 0 6px rgba(255,189,89,0.5);
+}
+ 
+.tfts-corner-logo {
+  width:110px;
+  height:110px;
+  border-radius:14px;
+  border:2px solid var(--tfts-brown);
+  background:var(--tfts-bg);
+  flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Creepster', cursive;
+  font-size:0.7em; color:var(--tfts-yellow); text-align:center;
+  box-shadow:0 0 16px rgba(255,189,89,0.2);
+  overflow:hidden;
+}
+.tfts-corner-logo img { width:100%; height:100%; object-fit:cover; border-radius:12px; }
+ 
+/* character panels */
+.tfts-chars-label {
+  font-family:'Creepster', cursive;
+  font-size:1.1em;
+  color:var(--tfts-yellow);
+  text-shadow:0 0 8px rgba(255,189,89,0.5);
+  margin-bottom:14px;
+  display:flex; align-items:center; gap:10px;
+}
+.tfts-chars-label::after {
+  content:''; flex:1; height:1px;
+  background:linear-gradient(90deg, var(--tfts-brown), transparent);
+}
+ 
+.tfts-chars-grid {
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:14px;
+}
+ 
+.tfts-char-panel {
+  background:var(--tfts-bg);
+  border:2px solid var(--tfts-brown);
+  border-radius:12px;
+  overflow:hidden;
+  aspect-ratio:16/9;        /* keeps 1920×1080 ratio */
+  display:flex; align-items:center; justify-content:center;
+  position:relative;
+  box-shadow:0 0 10px rgba(255,189,89,0.08);
+  transition:0.3s;
+}
+.tfts-char-panel:hover {
+  border-color:var(--tfts-yellow);
+  box-shadow:0 0 20px rgba(255,189,89,0.25);
+  transform:translateY(-3px);
+}
+.tfts-char-panel img {
+  width:100%; height:100%; object-fit:cover;
+  border-radius:10px;
+  display:block;
+}
+/* placeholder text shown when no img src */
+.tfts-char-panel .char-placeholder {
+  font-family:'Creepster', cursive;
+  font-size:0.85em;
+  color:rgba(255,189,89,0.3);
+  text-align:center;
+  padding:12px;
+  position:absolute;
+}
+.tfts-char-label {
+  position:absolute; bottom:0; left:0; right:0;
+  background:rgba(42,19,0,0.82);
+  padding:6px 12px;
+  font-size:0.75em;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--tfts-yellow);
+  opacity:0.9;
+}
+/* ════════════════════════════════════════
+   Project Panel (Normal Colors)
+════════════════════════════════════════ */
+.project-panel {
+  background: var(--proj-card);
+  border: 2px solid var(--proj-hl);  
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(255,112,243,0.3), 0 0 60px rgba(255,112,243,0.1);
+  margin-top: 40px;
+}
+
+.project-header {
+  background: var(--proj-header);
+  border-bottom: 2px solid var(--proj-border);
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 0 20px rgba(255,112,243,0.2);
+}
+
+.project-logo {
+  width: 48px; height: 48px;
+  border-radius: 10px;
+  border: 2px solid var(--proj-border);
+  background: var(--proj-badge);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Creepster', cursive;
+  font-size: 0.65em; color: var(--proj-hl);
+  text-align: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.project-logo img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
+
+.project-header-text h2 {
+  font-family: 'Creepster', cursive;
+  font-size: 1.6em;
+  color: var(--proj-hl);
+  text-shadow: 0 0 12px rgba(255,112,243,0.6);
+  letter-spacing: 1px;
+}
+.project-header-text span {
+  font-size: 0.72em; letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--proj-text);
+  opacity: 0.7;
+}
+
+.project-body {
+  padding: 28px 28px 32px;
+}
+
+.project-status-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.project-status-badge {
+  background: var(--proj-badge);
+  color: var(--proj-text);
+  font-family: 'Creepster', cursive;
+  font-size: 0.9em;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 6px 18px;
+  border-radius: 30px;
+  box-shadow: 0 0 12px rgba(159,0,146,0.5);
+}
+.project-status-text {
+  font-size: 0.88em;
+  color: var(--proj-text);
+  opacity: 0.85;
+  line-height: 1.6;
+}
+
+.project-top {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: start;
+  margin-bottom: 28px;
+}
+.project-description p {
+  font-size: 0.9em;
+  color: var(--proj-text);
+  line-height: 1.85;
+  opacity: 0.9;
+  margin-bottom: 10px;
+}
+.project-description p:last-child { margin-bottom: 0; }
+.project-description .project-hl {
+  color: var(--proj-hl);
+  font-weight: 700;
+  text-shadow: 0 0 6px rgba(255,112,243,0.5);
+}
+
+.project-corner-logo {
+  width: 110px; height: 110px;
+  border-radius: 14px;
+  border: 2px solid var(--proj-border);
+  background: var(--proj-bg);
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Creepster', cursive;
+  font-size: 0.7em; color: var(--proj-hl); text-align: center;
+  box-shadow: 0 0 16px rgba(255,112,243,0.2);
+  overflow: hidden;
+}
+.project-corner-logo img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; }
+
+.project-chars-label {
+  font-family: 'Creepster', cursive;
+  font-size: 1.1em;
+  color: var(--proj-hl);
+  text-shadow: 0 0 8px rgba(255,112,243,0.5);
+  margin-bottom: 14px;
+  display: flex; align-items: center; gap: 10px;
+}
+.project-chars-label::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, var(--proj-border), transparent);
+}
+
+.project-chars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.project-char-panel {
+  background: var(--proj-bg);
+  border: 2px solid var(--proj-border);
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 16/9;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  box-shadow: 0 0 10px rgba(255,112,243,0.08);
+  transition: 0.3s;
+}
+.project-char-panel:hover {
+  border-color: var(--proj-hl);
+  box-shadow: 0 0 20px rgba(255,112,243,0.25);
+  transform: translateY(-3px);
+}
+.project-char-panel img {
+  width: 100%; height: 100%; object-fit: cover;
+  border-radius: 10px; display: block;
+}
+.project-char-panel .char-placeholder {
+  font-family: 'Creepster', cursive;
+  font-size: 0.85em;
+  color: rgba(255,112,243,0.3);
+  text-align: center; padding: 12px; position: absolute;
+}
+.project-char-label {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: rgba(39,0,36,0.85);
+  padding: 6px 12px;
+  font-size: 0.75em;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--proj-hl);
+  opacity: 0.9;
+}
+
+/* responsive */
+@media(max-width:900px) {
+  .project-top   { grid-template-columns: 1fr; }
+  .project-corner-logo { display: none; }
+  .project-chars-grid  { grid-template-columns: 1fr; }
+}
+/* ════════════════════════════════════════
+   DISCORD  +  SOCIAL FOLLOW
+════════════════════════════════════════ */
+.cta-row {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+ 
+.cta-card {
+  background:var(--card-bg);
+  border:2px solid var(--dk-color);
+  border-radius:16px;
+  padding:28px 24px;
+  box-shadow:0 0 10px rgba(255,112,243,0.15);
+  transition:0.3s;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+.cta-card:hover {
+  border-color:var(--lt-color);
+  box-shadow:0 0 22px rgba(255,112,243,0.3);
+}
+.cta-card h3 {
+  font-family:'Creepster', cursive;
+  font-size:1.4em; color:var(--lt-color);
+  text-shadow:0 0 8px #ff70f3;
+}
+.cta-card p { font-size:0.88em; line-height:1.7; opacity:0.8; }
+ 
+.cta-btn {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:transparent;
+  border:2px solid var(--lt-color);
+  color:var(--lt-color);
+  font-family:'Raleway', sans-serif;
+  font-size:0.82em;
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  padding:10px 22px;
+  border-radius:30px;
+  text-decoration:none;
+  box-shadow:0 0 10px rgba(255,112,243,0.25);
+  transition:0.3s;
+  align-self:flex-start;
+}
+.cta-btn:hover {
+  background:var(--lt-color);
+  color:var(--dkest-color);
+  box-shadow:0 0 20px rgba(255,112,243,0.5);
+  transform:translateY(-2px);
+}
+ 
+.socials-list {
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.social-row {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:10px 14px;
+  background:rgba(255,112,243,0.05);
+  border:1px solid rgba(255,112,243,0.15);
+  border-radius:10px;
+  text-decoration:none;
+  color:var(--text);
+  font-size:0.88em;
+  transition:0.25s;
+}
+.social-row:hover {
+  border-color:var(--lt-color);
+  color:var(--lt-color);
+  background:rgba(255,112,243,0.1);
+  transform:translateX(4px);
+}
+.social-icon { font-size:1.3em; flex-shrink:0; }
+ 
+/* ── FOOTER ── */
+footer {
+  text-align:center;
+  padding:40px 5%;
+  border-top:1px solid var(--dk-color);
+  box-shadow:0 -10px 30px rgba(255,112,243,0.1);
+  font-size:0.85em;
+  opacity:0.6;
+  letter-spacing:1px;
+  position:relative; z-index:1;
+}
+ 
+/* ── ANIMATIONS ── */
+@keyframes glitch {
+  0%,89%,100% { transform:translate(0); filter:none; }
+  90%  { transform:translate(-3px, 2px); filter:hue-rotate(20deg); }
+  92%  { transform:translate(3px,-2px); filter:hue-rotate(-20deg); }
+  94%  { transform:translate(-2px,1px); }
+  96%  { transform:translate(2px,-1px); }
+  98%  { transform:translate(0); filter:none; }
+}
+@keyframes flicker {
+  0%,100% { opacity:1; }
+  95% { opacity:0.92; }
+  96% { opacity:0.4; }
+  97% { opacity:1; }
+}
+ 
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width:6px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--dk-color); border-radius:3px; box-shadow:0 0 6px var(--lt-color); }
+ 
+/* ── RESPONSIVE ── */
+@media(max-width:900px) {
+  .values-grid { grid-template-columns:1fr; }
+  .cta-row     { grid-template-columns:1fr; }
+  .tfts-chars-grid { grid-template-columns:1fr; }
+  .tfts-top    { grid-template-columns:1fr; }
+  .tfts-corner-logo { display:none; }
+}
+@media(max-width:768px) {
+  .nav-links { display:none; }
+  .team-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- FALLING STARS -->
+<script>
+function makeStar() {
+  let s = document.createElement("div");
+  s.className = "star";
+  s.innerHTML = "✦";
+  s.style.left = Math.random() * innerWidth + "px";
+  s.style.fontSize = (8 + Math.random() * 8) + "px";
+  s.style.animationDuration = (3 + Math.random() * 3) + "s";
+  s.style.opacity = 0.4 + Math.random() * 0.4;
+  document.body.appendChild(s);
+  setTimeout(() => s.remove(), 6000);
+}
+setInterval(makeStar, 300);
+</script>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="assets/images/logowords2.png" alt="Bad Rabbit Studio">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="shows.html">Shows</a></li>
+    <li class="dropdown">
+      <a href="#" class="active">About ▾</a>
+      <ul class="dropdown-menu">
+        <li><a href="about.html" class="active">About the Rabbit</a></li>
+        <li><a href="studio.html">About the Studio</a></li>
+      </ul>
+    </li>
+    <li><a href="socials.html">Socials</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE -->
+<div class="page">
+
+  <!-- PAGE TITLE -->
+  <h1 class="page-title">BadRabbit Studio</h1>
+  <p class="page-subtitle">✦ Where dreams Soar ✦</p>
+
+  <!-- =====================
+       Description SECTION
+  ===================== -->
+  <div class="section-label">Who are we</div>
+
+  <div class="studio-intro">
+      <h2>We make the weird stuff you've never seen before.</h2>
+      <p>
+        Bad Rabbit is a <span class="highlight"> One person Indie animation studio</span>. Right now, that one person is me, and I'm on a mission to share the most wacky, original stories with anyone who will watch. The kind of stories the big money bags would never greenlight. All because they're too weird and bold, and made with too much heart.
+      </p>
+      <p>
+        As of 2026, I'm working on pushing out <span class="highlight">our own stories first</span> before opening up to outside projects. Every idea here comes froma  real place, and I'm not willing to rush that.
+      </p>
+      <p>
+        I'm always looking to bring more people who share this passion. We're not a corporation, <span class="highlight">We're all in this together</span>.
+      </p>
+    </div>
+
+    
+  
+
+  <div class="divider"></div>
+
+  <!-- =====================
+       Value cards
+  ===================== -->
+  <div class="section-label">What We Stand For</div>
+ 
+  <div class="values-grid">
+ 
+    <div class="value-card">
+      <span class="value-card-icon">✦</span>
+      <h3>Original Stories</h3>
+      <p>
+        Creative, expressive, things you have genuinely never seen before. We value putting artists first
+        and chasing ideas that light something up, not ideas that are safe or predictable. We're not afraid of taking those risks.
+      </p>
+    </div>
+ 
+    <div class="value-card">
+      <span class="value-card-icon">◈</span>
+      <h3>We Listen</h3>
+      <p>
+        Want more updates on our progress? We give more updates. Want more engagement? We give more engagement.
+        We give our audience what they actually want. Unlike big money bags who guess.
+      </p>
+    </div>
+ 
+    <div class="value-card">
+      <span class="value-card-icon">❋</span>
+      <h3>Growing Together</h3>
+      <p>
+        This studio started as one person, and it'll grow as one team. Everyone who joins brings
+        the same passion and we carry all of it forward together. No one gets left behind.
+      </p>
+    </div>
+ 
+  </div>
+ 
+  <div class="divider"></div>
+ 
+  <!-- =====================
+       Tools we use
+  ===================== -->
+<div class="section-label"> Tools we Use </div>
+  <div class="tools-row">
+  <div class="tool-chip"><span class="tool-chip-icon">✐</span> Krita</div>
+  <div class="tool-chip"><span class="tool-chip-icon">🖳</span> Canva</div>
+  <div class="tool-chip"><span class="tool-chip-icon">🗁</span> Capcut</div>
+</div>
+
+  <div class="divider"></div>
+
+  <!-- =====================
+      The Team
+  ===================== -->
+  <div class="section-label">The Team</div>
+    
+    <div class="team-grid">
+      <div class="team-card">
+      <div class="team-avatar">
+        BR <!-- replace with an image-->
+    </div>
+<div class="team-info">
+  <h3> Bad Rabbit </h3>
+  <span class="team-role">Founder ★ Creator</span>
+  <p>The one holding everything together. Animator, Writer, director. Doing it all with a smile and pink fruity drinks</p>
+</div>
+    </div>
+      <div class="team-card">
+    <div class="team-avatar">
+        CH <!-- replace with an image-->
+    </div>
+<div class="team-info">
+  <h3> Chimkin </h3>
+  <span class="team-role">Advertiser ★ Hype Team</span>
+  <p>The one who believed first and the loudest. Keeps the word spreading and the audience hyped for what's coming.</p>
+</div>
+    </div>
+</div>
+      <div class="divider"></div>
+
+      
+        <!-- =====================
+      Project Process Pannels
+  ===================== -->
+<div class="section-label"> Currently Working on</div>
+
+      <div class="tfts-panel">
+
+        <div class="tfts-header">
+          <div class="tfts-logo">
+            <img src="assets/images/tftswatermark1(2).png" alt="TFTS Logo">
+          </div>
+          <div class="tfts-header-text">
+            <h2>The FunTime Show</h2>
+      <span>Original Series 🂱 In Development</span>
+      </div>
+        </div>
+
+        <div class="tfts-body">
+          <div class="tfts-status-row">
+            <span class="tfts-status-badge">In progress. . .</span>
+<span class="tfts-status-text">Currently in sketching and rough drafts phase</span>
+          </div>
+          
+          <div class="tfts-top">
+            <div class="tfts-description">
+              <p> <span class="tfts-hl">The FunTime Show</span> is the story I have been working on for years. It's finally becoming real. Right now we are working on drough drafts and sketching out everything. Designing characters, mapping out scenes, developing big secrets, and building this world from the ground up.</p>
+<p> This is our most ambitious project and we're taking it seriously. Every panel, every character, every beat and line of this story is crafted with intention.<span class="tfts-hl">Stay tuned, it's going to be something you have never seen before.</span></p>
+</div>
+            <div class="tfts-corner-logo">
+              <img src="assets/images/tftswatermark1.png" alt="The FunTime Show">
+            </div>
+            </div>
+
+          <p class="tfts-chars-label">Characters</p>
+<div class="tfts-chars-grid">
+
+  <div class="tfts-char-panel">
+    <img src="assets/images/Cindy Drift-tastic ref sheet 1.png" alt="Cindy Drift-Tastic">
+    <div class="tfts-char-label">Cindy Drift-Tastic</div>
+  </div>
+
+  <div class="tfts-char-panel">
+    <img src="assets/images/magicianbodysheet1.png" alt="Magician">
+    <div class="tfts-char-label">Magician</div>
+  </div>
+
+  <div class="tfts-char-panel">
+    <img src="assets/images/ringmasterbodysheet.png" alt="RingMaster">
+    <div class="tfts-char-label">RingMaster</div>
+  </div>
+</div>
+</div>
+</div>
+          
+      <div class="project-panel">
+
+        <div class="project-header">
+          <div class="project-logo">
+            <img src="assets/images/logowords2.png" alt="BadRabbit Studio Logo">
+          </div>
+          <div class="project-header-text">
+            <h2>BadRabbit Studio</h2>
+      <span>Indie Animation Studio ₍ᐢᐢ₎ Working on. . .</span>
+      </div>
+        </div>
+
+        <div class="project-body">
+          <div class="project-status-row">
+            <span class="project-status-badge">In progress. . .</span>
+<span class="project-status-text">Currently working on licenses and trademark</span>
+          </div>
+          
+          <div class="project-top">
+            <div class="project-description">
+              <p> <span class="project-hl">BadRabbit Studio</span> is something I thought I would never continue. I always wanted to create stories and more for others to enjoy, even if it was just one person. I still cannot believe I bought this website's domain. And I wont believe the next steps I'm going to take to make this a reality.</p>
+<p> This is our dream. We want to make sure it soars. <span class="project-hl">Stay tuned, we're going down the rabbit hole.</span></p>
+</div>
+            
+            <div class="project-corner-logo">
+              <img src="assets/images/logowords2.png" alt="BadRabbit Studio">
+            </div>
+            </div>
+
+</div>       
+    </div>
+  
+ 
+  <div class="divider"></div>
+
+       <!-- ════════════════════════
+       DISCORD + SOCIALS
+  ════════════════════════ -->
+<div class="section-label">Join The Pink Burrow</div>
+
+    <div class="cta-row">
+      <div class="cta-card">
+        <h3>݁ ˖Ი𐑼⋆ Discord Server</h3>
+        <p>Get real-time updates, chat with the team, and be part of what we're building. Our Discord is where the community lives. Come say hi!</p>
+        <a href="https://discord.gg/8AnhkuAtZK" class="cta-btn" target="_blank" rel="noopener">
+          Join the Server →
+        </a>
+      </div>
+      <div class="cta-card">
+        <h3>✦ Follow Our Progress</h3>
+        <p>Updates, behind-the-scenes, and project milestones. Follow along wherever you hang out!</p>
+        <div>
+           <a href="https://www.youtube.com/@BadRabbitAnimation" class="cta-btn" target="_blank" rel="noopener">
+          ▶Youtube
+        </a>
+
+  <a href="https://www.tiktok.com/@officialbadrabbit" class="cta-btn" target="_blank" rel="noopener">
+          ♪Tiktok
+        </a>
+        </div>
+      </div>
+    </div>
+</div>
+  
+ 
+<!-- END PAGE -->
+
+<!-- FOOTER -->
+<footer>
+  <p>2026 Bad Rabbit Studio</p>
+  <p style="margin-top:8px; font-size:0.9em; opacity:0.7;">discord.gg/8AnhkuAtZK · youtube.com/@BadRabbitAnimation</p>
+</footer>
+
+<!-- MOBILE DROPDOWN -->
+<script>
+document.querySelectorAll('.dropdown > a').forEach(a => {
+  a.addEventListener('click', e => {
+    if(window.innerWidth <= 768) {
+      e.preventDefault();
+      const menu = a.nextElementSibling;
+      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+  });
+});
+</script>
+
+</body>
+</html>
