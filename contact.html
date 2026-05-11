@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bad Rabbit Studio | Contact</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Creepster&family=Raleway:wght@400;600;700&display=swap');
+ 
+:root {
+  --dk-color:    #7f0074;
+  --mid-color:   #9f0092;
+  --lt-color:    #ff70f3;
+  --dkest-color: #270024;
+  --accent:      #28aeff;
+  --bg:          #1f0016;
+  --text:        #ffb4f9;
+  --card-bg:     #580050;
+  --card-border: #ff70f3;
+}
+ 
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+ 
+body {
+  min-height:100vh;
+  background:var(--bg);
+  font-family:'Raleway', sans-serif;
+  color:var(--text);
+  overflow-x:hidden;
+  animation:flicker 8s infinite;
+}
+ 
+/* ── FALLING STARS ── */
+.star {
+  position:fixed; top:-20px;
+  color:#ffacf9;
+  animation:starFall 5s linear forwards;
+  z-index:0; pointer-events:none; font-size:12px;
+}
+@keyframes starFall {
+  0%   { transform:translateY(0) rotate(0deg); opacity:1; }
+  80%  { opacity:1; }
+  100% { transform:translateY(100vh) rotate(360deg); opacity:0; }
+}
+ 
+/* ── NAV ── */
+nav {
+  position:fixed; top:0; width:100%;
+  padding:16px 5%;
+  display:flex; justify-content:space-between; align-items:center;
+  background:rgba(31,0,22,0.92);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--dk-color);
+  box-shadow:0 0 20px rgba(255,112,243,0.2);
+  z-index:1000;
+}
+.nav-logo img {
+  height:50px; width:auto;
+  filter:drop-shadow(0 0 8px #ff70f3);
+  transition:0.3s;
+}
+.nav-logo img:hover { filter:drop-shadow(0 0 16px #ff00ea); transform:scale(1.05); }
+ 
+.nav-links { display:flex; gap:28px; list-style:none; }
+.nav-links a {
+  color:var(--text); text-decoration:none;
+  font-size:0.85em; letter-spacing:1px; text-transform:uppercase;
+  transition:0.3s; position:relative;
+}
+.nav-links a::after {
+  content:''; position:absolute; bottom:-4px; left:0;
+  width:0; height:1px;
+  background:var(--lt-color); box-shadow:0 0 8px var(--lt-color);
+  transition:0.3s;
+}
+.nav-links a:hover { color:var(--lt-color); text-shadow:0 0 8px var(--lt-color); }
+.nav-links a:hover::after, .nav-links a.active::after { width:100%; }
+.nav-links a.active { color:var(--lt-color); }
+ 
+.dropdown { position:relative; }
+.dropdown-menu {
+  display:none; position:absolute; top:100%; left:0;
+  background:var(--card-bg); border:1px solid var(--dk-color);
+  border-radius:8px; padding:8px 0; list-style:none;
+  min-width:180px;
+  box-shadow:0 0 10px #ff70f3, 0 0 20px rgba(255,0,234,0.3);
+  z-index:999;
+}
+.dropdown-menu li a {
+  display:block; padding:10px 20px;
+  color:var(--text); text-decoration:none;
+  font-size:0.85em; letter-spacing:1px; transition:0.2s;
+}
+.dropdown-menu li a:hover { color:var(--lt-color); text-shadow:0 0 8px var(--lt-color); background:rgba(255,112,243,0.1); }
+.dropdown:hover .dropdown-menu { display:block; }
+ 
+/* ── PAGE WRAPPER ── */
+.page {
+  padding:100px 5% 60px;
+  max-width:1200px;
+  margin:0 auto;
+  position:relative;
+  z-index:1;
+}
+ 
+/* ── PAGE TITLE ── */
+.page-title {
+  font-family:'Creepster', cursive;
+  font-size:clamp(2.5em, 6vw, 4em);
+  color:var(--lt-color);
+  text-shadow:0 0 10px #ff70f3, 0 0 30px #ff00ea;
+  text-align:center;
+  margin-bottom:8px;
+  animation:glitch 6s infinite;
+}
+.page-subtitle {
+  text-align:center; font-size:0.9em;
+  opacity:0.6; letter-spacing:3px;
+  text-transform:uppercase; margin-bottom:60px;
+}
+ 
+/* ── DIVIDER ── */
+.divider {
+  width:100%; height:1px;
+  background:linear-gradient(90deg, transparent, var(--dk-color), transparent);
+  box-shadow:0 0 10px var(--dk-color);
+  margin:50px 0;
+}
+ 
+/* ── SECTION LABEL ── */
+.section-label {
+  font-family:'Creepster', cursive;
+  font-size:clamp(1.5em, 3vw, 2.2em);
+  color:var(--lt-color);
+  text-shadow:0 0 10px #ff70f3;
+  margin-bottom:30px;
+  display:flex; align-items:center; gap:12px;
+}
+.section-label::after {
+  content:''; flex:1; height:1px;
+  background:linear-gradient(90deg, var(--dk-color), transparent);
+}
+ 
+.highlight {
+  color:var(--lt-color); text-shadow:0 0 6px #ff70f3; font-weight:700;
+  background:rgba(255,112,243,0.1); padding:2px 6px; border-radius:4px;
+}
+ 
+/* ════════════════════════════════════════
+   CONTACT LAYOUT — form left, info right
+════════════════════════════════════════ */
+.contact-grid {
+  display:grid;
+  grid-template-columns:1.4fr 1fr;
+  gap:24px;
+  align-items:start;
+}
+ 
+/* ── FORM CARD ── */
+.form-card {
+  background:var(--card-bg);
+  border:2px solid var(--dk-color);
+  border-radius:18px;
+  padding:36px;
+  box-shadow:0 0 14px rgba(255,112,243,0.2), inset 0 0 20px rgba(255,112,243,0.04);
+  transition:0.3s;
+}
+.form-card:hover {
+  box-shadow:0 0 26px rgba(255,112,243,0.32), inset 0 0 28px rgba(255,112,243,0.07);
+}
+ 
+.form-card h2 {
+  font-family:'Creepster', cursive;
+  font-size:1.7em;
+  color:var(--lt-color);
+  text-shadow:0 0 8px #ff70f3;
+  margin-bottom:6px;
+}
+.form-card .form-sub {
+  font-size:0.82em;
+  opacity:0.6;
+  letter-spacing:1px;
+  margin-bottom:28px;
+}
+ 
+.form-group {
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  margin-bottom:18px;
+}
+ 
+.form-group label {
+  font-size:0.75em;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--lt-color);
+  opacity:0.8;
+}
+ 
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background:rgba(31,0,22,0.7);
+  border:1.5px solid var(--dk-color);
+  border-radius:10px;
+  padding:12px 16px;
+  color:var(--text);
+  font-family:'Raleway', sans-serif;
+  font-size:0.9em;
+  outline:none;
+  transition:0.25s;
+  width:100%;
+}
+ 
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color:var(--lt-color);
+  box-shadow:0 0 12px rgba(255,112,243,0.25);
+}
+ 
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color:rgba(255,180,249,0.3);
+}
+ 
+/* style the select dropdown arrow */
+.form-group select {
+  appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23ff70f3' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 14px center;
+  padding-right:36px;
+  cursor:pointer;
+}
+ 
+.form-group select option {
+  background:var(--dkest-color);
+  color:var(--text);
+}
+ 
+.form-group textarea {
+  resize:vertical;
+  min-height:140px;
+  line-height:1.6;
+}
+ 
+/* two-col row for name + email */
+.form-row {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+ 
+.submit-btn {
+  width:100%;
+  margin-top:8px;
+  background:transparent;
+  border:2px solid var(--lt-color);
+  color:var(--lt-color);
+  font-family:'Creepster', cursive;
+  font-size:1.1em;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  padding:14px 28px;
+  border-radius:40px;
+  cursor:pointer;
+  box-shadow:0 0 12px rgba(255,112,243,0.25);
+  transition:0.3s;
+}
+.submit-btn:hover {
+  background:var(--lt-color);
+  color:var(--dkest-color);
+  box-shadow:0 0 24px rgba(255,112,243,0.55);
+  transform:translateY(-2px);
+}
+ 
+/* success message (shown via JS) */
+.form-success {
+  display:none;
+  text-align:center;
+  padding:24px;
+}
+.form-success .success-icon { font-size:2.5em; margin-bottom:10px; display:block; }
+.form-success h3 {
+  font-family:'Creepster', cursive;
+  font-size:1.5em;
+  color:var(--lt-color);
+  text-shadow:0 0 8px #ff70f3;
+  margin-bottom:8px;
+}
+.form-success p { font-size:0.9em; opacity:0.8; line-height:1.7; }
+ 
+/* ── RIGHT COLUMN ── */
+.contact-sidebar {
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+ 
+/* info card shared style */
+.info-card {
+  background:var(--card-bg);
+  border:2px solid var(--dk-color);
+  border-radius:16px;
+  padding:26px 24px;
+  box-shadow:0 0 10px rgba(255,112,243,0.15);
+  transition:0.3s;
+  position:relative;
+  overflow:hidden;
+}
+.info-card::before {
+  content:'';
+  position:absolute; top:0; left:0; right:0;
+  height:3px;
+  background:linear-gradient(90deg, var(--dk-color), var(--lt-color), var(--dk-color));
+  box-shadow:0 0 8px var(--lt-color);
+}
+.info-card:hover {
+  border-color:var(--lt-color);
+  box-shadow:0 0 20px rgba(255,112,243,0.28);
+}
+ 
+.info-card h3 {
+  font-family:'Creepster', cursive;
+  font-size:1.25em;
+  color:var(--lt-color);
+  text-shadow:0 0 6px #ff70f3;
+  margin-bottom:14px;
+}
+ 
+/* direct links inside info card */
+.contact-link-row {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:10px 14px;
+  background:rgba(255,112,243,0.05);
+  border:1px solid rgba(255,112,243,0.15);
+  border-radius:10px;
+  text-decoration:none;
+  color:var(--text);
+  font-size:0.85em;
+  margin-bottom:10px;
+  transition:0.25s;
+  word-break:break-all;
+}
+.contact-link-row:last-child { margin-bottom:0; }
+.contact-link-row:hover {
+  border-color:var(--lt-color);
+  color:var(--lt-color);
+  background:rgba(255,112,243,0.1);
+  transform:translateX(4px);
+}
+.contact-link-icon { font-size:1.2em; flex-shrink:0; }
+ 
+/* open-to list */
+.open-to-list {
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.open-to-list li {
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  font-size:0.88em;
+  line-height:1.5;
+  opacity:0.85;
+  padding:8px 0;
+  border-bottom:1px solid rgba(255,112,243,0.1);
+}
+.open-to-list li:last-child { border-bottom:none; }
+.open-to-list li::before {
+  content:'✦';
+  color:var(--lt-color);
+  font-size:0.7em;
+  flex-shrink:0;
+  margin-top:3px;
+}
+ 
+/* notice bar */
+.notice-bar {
+  background:rgba(255,112,243,0.07);
+  border:1px solid rgba(255,112,243,0.2);
+  border-radius:12px;
+  padding:14px 18px;
+  font-size:0.8em;
+  line-height:1.6;
+  opacity:0.8;
+  text-align:center;
+}
+.notice-bar strong { color:var(--lt-color); }
+ 
+/* socials page link */
+.socials-nudge {
+  text-align:center;
+  font-size:0.82em;
+  opacity:0.65;
+  padding:6px 0;
+}
+.socials-nudge a {
+  color:var(--lt-color);
+  text-decoration:none;
+  border-bottom:1px dashed rgba(255,112,243,0.4);
+  transition:0.2s;
+}
+.socials-nudge a:hover { opacity:1; border-bottom-color:var(--lt-color); }
+ 
+/* ── FOOTER ── */
+footer {
+  text-align:center;
+  padding:40px 5%;
+  border-top:1px solid var(--dk-color);
+  box-shadow:0 -10px 30px rgba(255,112,243,0.1);
+  font-size:0.85em;
+  opacity:0.6;
+  letter-spacing:1px;
+  position:relative; z-index:1;
+}
+ 
+/* ── ANIMATIONS ── */
+@keyframes glitch {
+  0%,89%,100% { transform:translate(0); filter:none; }
+  90%  { transform:translate(-3px, 2px); filter:hue-rotate(20deg); }
+  92%  { transform:translate(3px,-2px); filter:hue-rotate(-20deg); }
+  94%  { transform:translate(-2px,1px); }
+  96%  { transform:translate(2px,-1px); }
+  98%  { transform:translate(0); filter:none; }
+}
+@keyframes flicker {
+  0%,100% { opacity:1; }
+  95% { opacity:0.92; }
+  96% { opacity:0.4; }
+  97% { opacity:1; }
+}
+ 
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width:6px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--dk-color); border-radius:3px; box-shadow:0 0 6px var(--lt-color); }
+ 
+/* ── RESPONSIVE ── */
+@media(max-width:860px) {
+  .contact-grid { grid-template-columns:1fr; }
+  .form-row { grid-template-columns:1fr; }
+}
+@media(max-width:768px) {
+  .nav-links { display:none; }
+}
+</style>
+</head>
+<body>
+ 
+<!-- FALLING STARS -->
+<script>
+function makeStar(){
+  let s=document.createElement("div");
+  s.className="star"; s.innerHTML="✦";
+  s.style.left=Math.random()*innerWidth+"px";
+  s.style.fontSize=(8+Math.random()*8)+"px";
+  s.style.animationDuration=(3+Math.random()*3)+"s";
+  s.style.opacity=0.4+Math.random()*0.4;
+  document.body.appendChild(s);
+  setTimeout(()=>s.remove(),6000);
+}
+setInterval(makeStar,300);
+</script>
+ 
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="assets/images/logowords2.png" alt="Bad Rabbit Studio">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="shows.html">Shows</a></li>
+    <li class="dropdown">
+      <a href="#">About ▾</a>
+      <ul class="dropdown-menu">
+        <li><a href="about.html">About the Rabbit</a></li>
+        <li><a href="studio.html">About the Studio</a></li>
+      </ul>
+    </li>
+    <li><a href="socials.html">Socials</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+</nav>
+ 
+<!-- PAGE -->
+<div class="page">
+ 
+  <h1 class="page-title">Get in Touch</h1>
+  <p class="page-subtitle">✦ we don't bite ✦</p>
+ 
+  <div class="section-label">Send a Message</div>
+ 
+  <div class="contact-grid">
+ 
+    <!-- ── FORM ── -->
+    <div class="form-card">
+      <h2>Drop us a line</h2>
+      <p class="form-sub">Fill out the form and we'll get back to you as soon as we can.</p>
+ 
+      <form id="contactForm" action="https://formspree.io/f/xpqbkwoz" method="POST">
+ 
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" placeholder="What do we call you?" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Your Email</label>
+            <input type="email" id="email" name="email" placeholder="So we can reply!" required>
+          </div>
+        </div>
+ 
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <select id="subject" name="subject" required>
+            <option value="" disabled selected>What's this about?</option>
+            <option value="General">General</option>
+            <option value="Collaboration">Collaboration</option>
+            <option value="Commission">Commission</option>
+            <option value="Fan Mail">Fan Mail ♡</option>
+            <option value="Business">Business (please read notice below)</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+ 
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Say whatever's on your mind..." required></textarea>
+        </div>
+ 
+        <button type="submit" class="submit-btn">Send it ✦</button>
+      </form>
+ 
+      <!-- shown after submit via JS -->
+      <div class="form-success" id="formSuccess">
+        <span class="success-icon">✦</span>
+        <h3>Message sent!</h3>
+        <p>Thanks for reaching out. We'll get back to you as soon as we can — probably with a pink drink in hand.</p>
+      </div>
+    </div>
+ 
+    <!-- ── SIDEBAR ── -->
+    <div class="contact-sidebar">
+ 
+      <!-- Direct contact -->
+      <div class="info-card">
+        <h3>✦ Direct Contact</h3>
+ 
+        <a href="mailto:BadRabbitDraws@protonmail.com" class="contact-link-row">
+          <span class="contact-link-icon">✉</span>
+          <span>BadRabbitDraws@protonmail.com</span>
+        </a>
+ 
+        <a href="https://discord.gg/8AnhkuAtZK" class="contact-link-row" target="_blank" rel="noopener">
+          <span class="contact-link-icon">◈</span>
+          <span>discord.gg/8AnhkuAtZK</span>
+        </a>
+      </div>
+ 
+      <!-- What we're open to -->
+      <div class="info-card">
+        <h3>◈ What we're open to</h3>
+        <ul class="open-to-list">
+          <li>Fan mail and kind words — always welcome</li>
+          <li>Collaboration ideas from fellow indie creators</li>
+          <li>Questions about our projects or process</li>
+          <li>Commission inquiries — select "Commission" in the subject</li>
+          <li>Business inquiries — select "Business" and we'll get back to you</li>
+        </ul>
+      </div>
+ 
+      <!-- Response time -->
+      <div class="info-card">
+        <h3>❋ What to expect</h3>
+        <p style="font-size:0.88em; line-height:1.75; opacity:0.85;">
+          We try to reply within a few days. This is a one-person studio so bear with us — we're probably sketching something right now.
+          <br><br>
+          For the fastest response, join our <a href="https://discord.gg/8AnhkuAtZK" style="color:var(--lt-color); text-decoration:none; border-bottom:1px dashed rgba(255,112,243,0.4);" target="_blank">Discord server</a> — that's where we're most active.
+        </p>
+      </div>
+ 
+      <!-- Business notice -->
+      <div class="notice-bar">
+        <strong>Business inquiries:</strong> please include "Business" in your subject line so we can prioritise your message correctly.
+      </div>
+ 
+      <!-- Socials nudge -->
+      <p class="socials-nudge">
+        Just want to follow along? Head to our <a href="socials.html">Socials page →</a>
+      </p>
+ 
+    </div><!-- closes contact-sidebar -->
+  </div><!-- closes contact-grid -->
+ 
+</div><!-- END PAGE -->
+ 
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Bad Rabbit Studio</p>
+  <p style="margin-top:8px; font-size:0.9em; opacity:0.7;">discord.gg/8AnhkuAtZK · youtube.com/@BadRabbitAnimation</p>
+</footer>
+ 
+<!-- MOBILE DROPDOWN -->
+<script>
+document.querySelectorAll('.dropdown > a').forEach(a => {
+  a.addEventListener('click', e => {
+    if(window.innerWidth <= 768){
+      e.preventDefault();
+      const menu = a.nextElementSibling;
+      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+  });
+});
+</script>
+ 
+<!-- FORM SUCCESS HANDLER -->
+<script>
+const form = document.getElementById('contactForm');
+const success = document.getElementById('formSuccess');
+ 
+form.addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const data = new FormData(form);
+ 
+  try {
+    const res = await fetch(form.action, {
+      method:'POST',
+      body:data,
+      headers:{ 'Accept':'application/json' }
+    });
+ 
+    if(res.ok){
+      form.style.display = 'none';
+      success.style.display = 'block';
+    } else {
+      alert('Something went wrong — try emailing us directly at BadRabbitDraws@protonmail.com');
+    }
+  } catch(err) {
+    alert('Something went wrong — try emailing us directly at BadRabbitDraws@protonmail.com');
+  }
+});
+</script>
+ 
+</body>
+</html>
