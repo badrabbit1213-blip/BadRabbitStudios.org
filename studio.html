@@ -783,6 +783,44 @@ text-shadow: 0 0 6px #ff70f3;
   .nav-links { display:none; }
   .team-grid { grid-template-columns:1fr; }
 }
+   .hamburger { 
+    display: none; 
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: 1px solid var(--dk-color);
+  border-radius: 6px;
+  padding: 8px;
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--lt-color);
+  border-radius: 2px;
+  box-shadow: 0 0 6px var(--lt-color);
+}
+.nav-links.nav-open {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 82px;
+  left: 0;
+  width: 100%;
+  background: rgba(31,0,22,0.97);
+  border-bottom: 1px solid var(--dk-color);
+  padding: 10px 0;
+}
+@media(max-width:768px) {
+  .rabbit-corner {
+    width: 80px;
+    right: 10px;
+  }
+  .nav-links { display: none; }
+.hamburger { display: flex; }
+}
 </style>
 </head>
 <body>
@@ -820,6 +858,11 @@ setInterval(makeStar, 300);
     </li>
     <li><a href="socials.html">Socials</a></li>
     <li><a href="contact.html">Contact</a></li>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
   </ul>
 </nav>
 
@@ -1061,7 +1104,13 @@ setInterval(makeStar, 300);
 </footer>
 
 <!-- MOBILE DROPDOWN -->
-<script>
+  <script>
+// Hamburger menu
+document.getElementById('hamburger').addEventListener('click', function() {
+  document.querySelector('.nav-links').classList.toggle('nav-open');
+});
+
+// About dropdown on mobile
 document.querySelectorAll('.dropdown > a').forEach(a => {
   a.addEventListener('click', e => {
     if(window.innerWidth <= 768) {
