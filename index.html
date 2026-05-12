@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bad Rabbit Studio</title>
-<link rel="icon" type="image/x-icon" href="assets/images/logobrand.png">
-<link rel="apple-touch-icon" href="logobrand.png">
+<link rel="icon" type="image/png" href="assets/images/logobrand.png">
+<link rel="apple-touch-icon" href="assets/images/logobrand.png">
 <meta name="theme-color" content="#1f0016">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Creepster&family=Raleway:wght@400;700&display=swap');
@@ -515,12 +515,12 @@ text-shadow: 0 0 6px #ff70f3;
     <img src="assets/images/logowords2.png" alt="Bad Rabbit Studio">
   </a>
   <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html" class="active">Home</a></li>
     <li><a href="shows.html">Shows</a></li>
     <li class="dropdown">
-      <a href="#" class="active">About ▾</a>
+      <a href="#">About ▾</a>
       <ul class="dropdown-menu">
-        <li><a href="about.html" class="active">About the Rabbit</a></li>
+        <li><a href="about.html">About the Rabbit</a></li>
         <li><a href="studio.html">About the Studio</a></li>
       </ul>
     </li>
@@ -618,16 +618,23 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 </script>
- <script>
-  // Mobile dropdown toggle
+ <!-- MOBILE DROPDOWN -->
+  <script>
+// Hamburger menu
+document.getElementById('hamburger').addEventListener('click', function() {
+  document.querySelector('.nav-links').classList.toggle('nav-open');
+});
+
+// About dropdown on mobile
 document.querySelectorAll('.dropdown > a').forEach(a => {
   a.addEventListener('click', e => {
-    e.preventDefault();
-    const menu = a.nextElementSibling;
-    menu.style.display = 
-      menu.style.display === 'block' ? 'none' : 'block';
+    if(window.innerWidth <= 768) {
+      e.preventDefault();
+      const menu = a.nextElementSibling;
+      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
   });
 });
- </script>
+</script>
 </body>
 </html>
