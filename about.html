@@ -655,8 +655,44 @@ text-shadow: 0 0 6px #ff70f3;
 ::-webkit-scrollbar { width:6px; }
 ::-webkit-scrollbar-track { background:var(--bg); }
 ::-webkit-scrollbar-thumb { background:var(--dk-color); border-radius:3px; box-shadow:0 0 6px var(--lt-color); }
+  
+/* HAMBURGER */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 
-/* Hamgurger */
+  width: 44px;
+  height: 44px;
+
+  background: transparent;
+  border: 1px solid var(--dk-color);
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  padding: 0;
+
+  z-index: 1001;
+}
+
+.hamburger span {
+  display: block;
+
+  width: 22px;
+  height: 2px;
+
+  background: var(--lt-color);
+
+  border-radius: 999px;
+
+  box-shadow: 0 0 6px var(--lt-color);
+
+  flex-shrink: 0;
+}
+  
  @media (max-width: 768px) {
 
   .nav-links {
