@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bad Rabbit Studio</title>
-<link rel="icon" type="image/x-icon" href="logobrand.png">
+<link rel="icon" type="image/x-icon" href="assets/images/logobrand.png">
 <link rel="apple-touch-icon" href="logobrand.png">
 <meta name="theme-color" content="#1f0016">
 <style>
@@ -407,7 +407,7 @@ section {
 }
 /* FOOTER */
 footer {
-  text-align:center;
+   text-align:center;
   padding:40px 5%;
   border-top:1px solid var(--dk-color);
   box-shadow:0 -10px 30px rgba(255,112,243,0.1);
@@ -467,6 +467,44 @@ text-shadow: 0 0 6px #ff70f3;
           drop-shadow(0 0 30px #ff00ea);
   margin-bottom: 30px;
 }
+  .hamburger { 
+    display: none; 
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: 1px solid var(--dk-color);
+  border-radius: 6px;
+  padding: 8px;
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--lt-color);
+  border-radius: 2px;
+  box-shadow: 0 0 6px var(--lt-color);
+}
+.nav-links.nav-open {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 82px;
+  left: 0;
+  width: 100%;
+  background: rgba(31,0,22,0.97);
+  border-bottom: 1px solid var(--dk-color);
+  padding: 10px 0;
+}
+@media(max-width:768px) {
+  .rabbit-corner {
+    width: 80px;
+    right: 10px;
+  }
+  .nav-links { display: none; }
+.hamburger { display: flex; }
+}
 </style>
 </head>
 <body>
@@ -488,6 +526,11 @@ text-shadow: 0 0 6px #ff70f3;
     </li>
     <li><a href="socials.html">Socials</a></li>
     <li><a href="contact.html">Contact</a></li>
+   <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
   </ul>
 </nav>
  
@@ -562,7 +605,7 @@ text-shadow: 0 0 6px #ff70f3;
 <!-- FOOTER -->
 <footer>
   <p>2026 Bad Rabbit Studio</p>
-  <p style="margin-top:8px; font-size:0.9em;">discord.gg/8AnhkuAtZK &nbsp;·&nbsp; youtube.com/@BadRabbitAnimation</p>
+  <p style="margin-top:8px; font-size:0.9em;">discord.gg/8AnhkuAtZK · youtube.com/@BadRabbitAnimation</p>
 </footer>
  
 <!-- FLICKER SCRIPT -->
