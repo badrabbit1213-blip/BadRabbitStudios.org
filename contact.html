@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bad Rabbit Studio | Contact</title>
-<link rel="icon" type="image/png" href="favicon.png">
+<link rel="icon" type="image/png" href="assets/images/logobrand.png">
+<link rel="apple-touch-icon" href="assets/images/logobrand.png">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Creepster&family=Raleway:wght@400;600;700&display=swap');
  
@@ -423,6 +424,7 @@ footer {
 text-shadow: 0 0 6px #ff70f3;
 }
  
+ 
 /* ── ANIMATIONS ── */
 @keyframes glitch {
   0%,89%,100% { transform:translate(0); filter:none; }
@@ -443,7 +445,44 @@ text-shadow: 0 0 6px #ff70f3;
 ::-webkit-scrollbar { width:6px; }
 ::-webkit-scrollbar-track { background:var(--bg); }
 ::-webkit-scrollbar-thumb { background:var(--dk-color); border-radius:3px; box-shadow:0 0 6px var(--lt-color); }
- 
+  .hamburger { 
+    display: none; 
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: 1px solid var(--dk-color);
+  border-radius: 6px;
+  padding: 8px;
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--lt-color);
+  border-radius: 2px;
+  box-shadow: 0 0 6px var(--lt-color);
+}
+.nav-links.nav-open {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 82px;
+  left: 0;
+  width: 100%;
+  background: rgba(31,0,22,0.97);
+  border-bottom: 1px solid var(--dk-color);
+  padding: 10px 0;
+}
+@media(max-width:768px) {
+  .rabbit-corner {
+    width: 80px;
+    right: 10px;
+  }
+  .nav-links { display: none; }
+.hamburger { display: flex; }
+}
 /* ── RESPONSIVE ── */
 @media(max-width:860px) {
   .contact-grid { grid-template-columns:1fr; }
@@ -489,6 +528,11 @@ setInterval(makeStar,300);
     <li><a href="socials.html">Socials</a></li>
     <li><a href="contact.html" class="active">Contact</a></li>
   </ul>
+  <button class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
 </nav>
  
 <!-- PAGE -->
@@ -605,20 +649,17 @@ setInterval(makeStar,300);
  
 <!-- FOOTER -->
 <footer>
-  <p>© 2026 Bad Rabbit Studio</p>
+  <p>2026 Bad Rabbit Studio</p>
   <p style="margin-top:8px; font-size:0.9em; opacity:0.7;">discord.gg/8AnhkuAtZK · youtube.com/@BadRabbitAnimation</p>
 </footer>
  
 <!-- MOBILE DROPDOWN -->
 <script>
-document.querySelectorAll('.dropdown > a').forEach(a => {
-  a.addEventListener('click', e => {
-    if(window.innerWidth <= 768){
-      e.preventDefault();
-      const menu = a.nextElementSibling;
-      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-    }
-  });
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+
+hamburger.addEventListener('click', () => {
+  navLinks.classList.toggle('nav-open');
 });
 </script>
  
@@ -649,6 +690,7 @@ form.addEventListener('submit', async function(e) {
   }
 });
 </script>
+ 
  
 </body>
 </html>
