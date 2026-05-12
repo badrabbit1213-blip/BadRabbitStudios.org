@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bad Rabbit Studio | About</title>
-<link rel="icon" type="image/png" href="favicon.png">
+<link rel="icon" type="image/png" href="assets/images/logobrand.png">
+<link rel="apple-touch-icon" href="assets/images/logobrand.png">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Creepster&family=Raleway:wght@400;600;700&display=swap');
 
@@ -619,11 +620,12 @@ footer {
   border-top:1px solid var(--dk-color);
   box-shadow:0 -10px 30px rgba(255,112,243,0.1);
   font-size:0.85em;
-  opacity:0.6;
   letter-spacing:1px;
-  position:relative;
-  z-index:1;
+  position:relative; z-index:1;
+  color:var(--lt-color);
+text-shadow: 0 0 6px #ff70f3;
 }
+
 .highlight {
   color: var(--lt-color);
   text-shadow: 0 0 6px #ff70f3;
@@ -937,14 +939,11 @@ setInterval(makeStar, 300);
 
 <!-- MOBILE DROPDOWN -->
 <script>
-document.querySelectorAll('.dropdown > a').forEach(a => {
-  a.addEventListener('click', e => {
-    if(window.innerWidth <= 768) {
-      e.preventDefault();
-      const menu = a.nextElementSibling;
-      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-    }
-  });
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+
+hamburger.addEventListener('click', () => {
+  navLinks.classList.toggle('nav-open');
 });
 </script>
 
