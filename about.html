@@ -656,43 +656,35 @@ text-shadow: 0 0 6px #ff70f3;
 ::-webkit-scrollbar-thumb { background:var(--dk-color); border-radius:3px; box-shadow:0 0 6px var(--lt-color); }
 
 /* Hamgurger */
-   .hamburger { 
-    display: none; 
-  flex-direction: column;
-  gap: 5px;
-  cursor: pointer;
-  background: none;
-  border: 1px solid var(--dk-color);
-  border-radius: 6px;
-  padding: 8px;
-}
-
-.hamburger span {
-  display: block;
-  width: 22px;
-  height: 2px;
-  background: var(--lt-color);
-  border-radius: 2px;
-  box-shadow: 0 0 6px var(--lt-color);
-}
-.nav-links.nav-open {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 82px;
-  left: 0;
-  width: 100%;
-  background: rgba(31,0,22,0.97);
-  border-bottom: 1px solid var(--dk-color);
-  padding: 10px 0;
-}
-@media(max-width:768px) {
-  .rabbit-corner {
-    width: 80px;
-    right: 10px;
+ .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 82px;
+    left: 0;
+    width: 100%;
+    background: rgba(31,0,22,0.97);
+    border-bottom: 1px solid var(--dk-color);
+    padding: 20px;
+    gap: 20px;
+    z-index: 999;
   }
-  .nav-links { display: none; }
-.hamburger { display: flex; }
+
+  .nav-links.nav-open {
+    display: flex;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .show-card {
+    flex-direction: column;
+  }
+
+  .show-image {
+    width: 100%;
+  }
 }
 
   
@@ -731,7 +723,7 @@ setInterval(makeStar, 300);
   <a href="index.html" class="nav-logo">
     <img src="assets/images/logowords2.png" alt="Bad Rabbit Studio">
   </a>
-  <ul class="nav-links">
+  <ul class="nav-links" id="navLinks">
     <li><a href="index.html">Home</a></li>
     <li><a href="shows.html">Shows</a></li>
     <li class="dropdown">
