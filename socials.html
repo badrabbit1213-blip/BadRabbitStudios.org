@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bad Rabbit Studio | Socials</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Creepster&family=Raleway:wght@400;600;700&display=swap');
+
+:root {
+--dk-color:    #7f0074;
+--lt-color:    #ff70f3;
+--dkest-color: #270024;
+--accent:      #28aeff;
+--bg:          #1f0016;
+--text:        #ffb4f9;
+--card-bg:     #580050;
+  --card-border: #ff70f3;
+}
+
+* , *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+min-height:100vh;
+background:var(--bg);
+font-family:'Raleway', sans-serif;
+color:var(--text);
+overflow-x:hidden;
+  animation: flicker 8s infinite;
+}
+@keyframes flicker {
+0%,100% { opacity: 1; }
+95%      { opacity: 0.92; }
+96%      { opacity: 0.4; }
+97%      { opacity: 1; }
+}
+/* ── FALLING STARS ── */
+.star {
+position:fixed; top:-20px;
+color:#ffacf9;
+animation:starFall 5s linear forwards;
+z-index:0; pointer-events:none; font-size:12px;
+}
+@keyframes starFall {
+0%   { transform:translateY(0) rotate(0deg); opacity:1; }
+80%  { opacity:1; }
+100% { transform:translateY(100vh) rotate(360deg); opacity:0; }
+}
+/* GLITCH EFFECT */
+@keyframes glitch {
+0%, 89%, 100% {
+transform: translate(0);
+filter: none;
+}
+90% {
+transform: translate(-3px, 2px);
+filter: hue-rotate(20deg);
+}
+92% {
+transform: translate(3px, -2px);
+filter: hue-rotate(-20deg);
+}
+94% { transform: translate(-2px, 1px); }
+96% { transform: translate(2px, -1px); }
+98% {
+transform: translate(0);
+filter: none;
+}
+}
+/* ── NAV ── */
+nav {
+position:fixed; top:0; width:100%;
+padding:16px 5%;
+display:flex; justify-content:space-between; align-items:center;
+background:rgba(31,0,22,0.92);
+backdrop-filter:blur(8px);
+border-bottom:1px solid var(--dk-color);
+box-shadow:0 0 20px rgba(255,112,243,0.2);
+z-index:1000;
+}
+.nav-logo img {
+height:50px; width:auto;
+filter:drop-shadow(0 0 8px #ff70f3);
+transition:0.3s;
+}
+.nav-logo img:hover { filter:drop-shadow(0 0 16px #ff00ea); transform:scale(1.05); }
+
+.nav-links { display:flex; gap:28px; list-style:none; }
+.nav-links a {
+color:var(--text); text-decoration:none;
+font-size:0.85em; letter-spacing:1px; text-transform:uppercase;
+transition:0.3s; position:relative;
+}
+.nav-links a::after {
+content:''; position:absolute; bottom:-4px; left:0;
+width:0; height:1px;
+background:var(--lt-color); box-shadow:0 0 8px var(--lt-color);
+transition:0.3s;
+}
+.nav-links a:hover { color:var(--lt-color); text-shadow:0 0 8px var(--lt-color); }
+.nav-links a:hover::after, .nav-links a.active::after { width:100%; }
+.nav-links a.active { color:var(--lt-color); }
+
+.dropdown { position:relative; }
+.dropdown-menu {
+display:none; position:absolute; top:100%; left:0;
+background:var(--card-bg); border:1px solid var(--dk-color);
+border-radius:8px; padding:8px 0; list-style:none;
+min-width:180px;
+box-shadow:0 0 10px #ff70f3, 0 0 20px rgba(255,0,234,0.3);
+z-index:999;
+}
+.dropdown-menu li a {
+display:block; padding:10px 20px;
+color:var(--text); text-decoration:none;
+font-size:0.85em; letter-spacing:1px; transition:0.2s;
+}
+.dropdown-menu li a:hover { color:var(--lt-color); text-shadow:0 0 8px var(--lt-color); background:rgba(255,112,243,0.1); }
+.dropdown:hover .dropdown-menu { display:block; }
+
+/* ── PAGE WRAPPER ── */
+.page {
+padding:100px 5% 60px;
+max-width:1200px;
+margin:0 auto;
+position:relative;
+z-index:1;
+}
+/* ── PAGE TITLE ── */
+.page-title {
+font-family:'Creepster', cursive;
+font-size:clamp(2.5em, 6vw, 4em);
+color:var(--lt-color);
+text-shadow:0 0 10px #ff70f3, 0 0 30px #ff00ea;
+text-align:center;
+margin-bottom:8px;
+animation:glitch 6s infinite;
+}
+.page-subtitle {
+text-align:center; font-size:0.9em;
+opacity:0.6; letter-spacing:3px;
+text-transform:uppercase; margin-bottom:60px;
+}
+
+/* ── DIVIDER ── */
+.divider {
+width:100%; height:1px;
+background:linear-gradient(90deg, transparent, var(--dk-color), transparent);
+box-shadow:0 0 10px var(--dk-color);
+margin:50px 0;
+}
+
+/* ── SECTION LABEL ── */
+.section-label {
+font-family:'Creepster', cursive;
+font-size:clamp(1.5em, 3vw, 2.2em);
+color:var(--lt-color);
+text-shadow:0 0 10px #ff70f3;
+margin-bottom:30px;
+display:flex; align-items:center; gap:12px;
+}
+.section-label::after {
+content:''; flex:1; height:1px;
+background:linear-gradient(90deg, var(--dk-color), transparent);
+}
+
+  /* Platform Cards */
+  
+.platform-card h3{
+font-family: 'Creepster', cursive;
+font-size:1.3em;
+color:var(--lt-color);
+text-shadow: 0 0 6px #ff70f3;
+margin-bottom: 10px;
+}
+.platform-card p{
+font-size:0.88em;
+line-height:1.7;
+opacity:0.8;
+margin-bottom:16px;
+}
+.platform-btn{
+ display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:transparent;
+  border:2px solid var(--lt-color);
+  color:var(--lt-color);
+  font-family:'Raleway', sans-serif;
+  font-size:0.82em;
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  padding:10px 22px;
+  border-radius:30px;
+  text-decoration:none;
+  box-shadow:0 0 10px rgba(255,112,243,0.25);
+  transition:0.3s;
+  align-self:flex-start;
+}
+.platform-btn:hover {
+  background:var(--lt-color);
+  color:var(--dkest-color);
+  box-shadow:0 0 20px rgba(255,112,243,0.5);
+  transform:translateY(-2px);
+}
+  .platform-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+  /* ── FOOTER ── */
+footer {
+  text-align:center;
+  padding:40px 5%;
+  border-top:1px solid var(--dk-color);
+  box-shadow:0 -10px 30px rgba(255,112,243,0.1);
+  font-size:0.85em;
+  letter-spacing:1px;
+  position:relative; z-index:1;
+  color:var(--lt-color);
+text-shadow: 0 0 6px #ff70f3;
+}
+  /* ── RABBIT CORNER ── */
+.rabbit-corner {
+  position: fixed;
+  bottom: 0;
+  right: 20px;
+  z-index: 999;
+  width: 120px;
+  cursor: pointer;
+}
+
+.rabbit-corner img {
+  width: 100%;
+  height: auto;
+  animation: rabbitSway 2s ease-in-out infinite;
+  display: block;
+}
+
+@keyframes rabbitSway {
+  0%   { transform: rotate(-4deg); }
+  50%  { transform: rotate(4deg); }
+  100% { transform: rotate(-4deg); }
+}
+
+.rabbit-corner .tooltip {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  background: var(--card-bg);
+  border: 1px solid var(--lt-color);
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 0.78em;
+  color: var(--lt-color);
+  text-shadow: 0 0 6px #ff70f3;
+  box-shadow: 0 0 10px rgba(255,112,243,0.3);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.rabbit-corner:hover .tooltip {
+  opacity: 1;
+}
+
+  .hamburger { 
+    display: none; 
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: 1px solid var(--dk-color);
+  border-radius: 6px;
+  padding: 8px;
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--lt-color);
+  border-radius: 2px;
+  box-shadow: 0 0 6px var(--lt-color);
+}
+.nav-links.nav-open {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 82px;
+  left: 0;
+  width: 100%;
+  background: rgba(31,0,22,0.97);
+  border-bottom: 1px solid var(--dk-color);
+  padding: 10px 0;
+}
+@media(max-width:768px) {
+  .rabbit-corner {
+    width: 80px;
+    right: 10px;
+  }
+  .nav-links { display: none; }
+.hamburger { display: flex; }
+}
+</style>
+</head>
+<body>
+  
+  <!-- Nav Bar --> 
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="assets/images/logowords2.png" alt="Bad Rabbit Studio">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="shows.html">Shows</a></li>
+    <li class="dropdown">
+      <a href="#">About ▾</a>
+      <ul class="dropdown-menu">
+        <li><a href="about.html">About the Rabbit</a></li>
+        <li><a href="studio.html">About the Studio</a></li>
+      </ul>
+    </li>
+    <li><a href="socials.html" class="active">Socials</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+  </ul>
+</nav>
+
+<div class="page">
+
+  <h1 class="page-title">The Smile in Pink</h1>
+  <p class="page-subtitle">Where the weird and unsual is expected.</p>
+
+<div class="section-label">Animations</div>
+
+<p>Where you can see both the rough drafts and the polished sparkly versions</p>
+
+<div class="platform-grid">
+
+  <!-- YouTube card -->
+  <div class="platform-card">
+    <h3>YouTube</h3>
+    <p>Full animations, compellation of smaller animations, practice animations, and bigger updates that go over a good chunk of whats going on.</p>
+    <a href="https://www.youtube.com/@BadRabbitAnimation" class="platform-btn" target="_blank" rel="noopener">
+      Visit Channel →
+    </a>
+  </div>
+
+  <!-- TikTok card -->
+  <div class="platform-card">
+    <h3>Tiktok</h3>
+    <p>Small animations, small announcements / updates, engaging with community</p>
+    <a href="https://www.tiktok.com/@officialbadrabbit" class="platform-btn" target="_blank" rel="noopener">
+      Visit Channel →
+    </a>
+  </div>
+
+  </div>
+  
+<div class="divider"></div>
+  
+  <div class="section-label">Stay Updated</div>
+  <p>Where you can see all of the "Behind the Scenes"</p>
+<div class="platform-grid">
+  
+  
+<!-- BlueSky card -->
+  <div class="platform-card">
+    <h3>BlueSky</h3>
+    <p>More frequent updates, giving a run down as to whats going on</p>
+    <a href="https://bsky.app/profile/badrabbitstudio.bsky.social" class="platform-btn" target="_blank" rel="noopener">
+      Visit Profile →
+    </a>
+  </div>
+
+<!-- Discord card -->
+  <div class="platform-card">
+    <h3>Discord</h3>
+    <p>More elaborate updates, talking to community and getting feedback/inputs.</p>
+    <a href="https://discord.gg/8AnhkuAtZK" class="platform-btn" target="_blank" rel="noopener">
+      Visit Community →
+    </a>
+  </div>
+</div>
+
+
+<div class="divider"></div>
+  
+</div> <!-- End of page -->
+
+  
+<!-- FOOTER -->
+<footer>
+  <p>2026 Bad Rabbit Studio</p>
+  <p style="margin-top:8px; font-size:0.9em; opacity:0.7;">discord.gg/8AnhkuAtZK · youtube.com/@BadRabbitAnimation</p>
+</footer>
+
+  <div class="rabbit-corner">
+<img src="assets/images/rabbitcrouch.png" alt="Rabbit">
+<div class="tooltip">Thank you for visiting my website, again.
+</div>
+</div>
+  
+<!-- MOBILE DROPDOWN -->
+  <script>
+// Hamburger menu
+document.getElementById('hamburger').addEventListener('click', function() {
+  document.querySelector('.nav-links').classList.toggle('nav-open');
+});
+
+// About dropdown on mobile
+document.querySelectorAll('.dropdown > a').forEach(a => {
+  a.addEventListener('click', e => {
+    if(window.innerWidth <= 768) {
+      e.preventDefault();
+      const menu = a.nextElementSibling;
+      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+  });
+});
+</script>
+
+</body>
+</html>
