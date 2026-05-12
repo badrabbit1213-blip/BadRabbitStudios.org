@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bad Rabbit Studio | Socials</title>
-<link rel="icon" type="image/png" href="favicon.png">
+<link rel="icon" type="image/png" href="assets/images/logobrand.png">
+<link rel="apple-touch-icon" href="assets/images/logobrand.png">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Creepster&family=Raleway:wght@400;600;700&display=swap');
 
@@ -326,12 +327,12 @@ text-shadow: 0 0 6px #ff70f3;
     </li>
     <li><a href="socials.html" class="active">Socials</a></li>
     <li><a href="contact.html">Contact</a></li>
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-  <span></span>
-  <span></span>
-  <span></span>
-</button>
   </ul>
+  <button class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
 </nav>
 
 <div class="page">
@@ -411,20 +412,11 @@ text-shadow: 0 0 6px #ff70f3;
   
 <!-- MOBILE DROPDOWN -->
   <script>
-// Hamburger menu
-document.getElementById('hamburger').addEventListener('click', function() {
-  document.querySelector('.nav-links').classList.toggle('nav-open');
-});
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
 
-// About dropdown on mobile
-document.querySelectorAll('.dropdown > a').forEach(a => {
-  a.addEventListener('click', e => {
-    if(window.innerWidth <= 768) {
-      e.preventDefault();
-      const menu = a.nextElementSibling;
-      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-    }
-  });
+hamburger.addEventListener('click', () => {
+  navLinks.classList.toggle('nav-open');
 });
 </script>
 
