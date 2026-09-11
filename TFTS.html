@@ -1985,7 +1985,7 @@ setInterval(makeConfetti, 150);
     </div>
     <img src="assets/images/Untitled496_20250929230641.png" alt="Cindy concept" loading="lazy">
     <div class="art-overlay">
-      <div class="art-title">Old Cindy Sketch</div>
+      <div class="art-title">Old Lola Sketch</div>
       <div class="art-sub">Old Design</div>
     </div>
   </div>
@@ -2088,6 +2088,7 @@ setInterval(makeConfetti, 150);
 <!-- END PAGE -->
 
 <!-- FOOTER -->
+
   <div class="rabbit-corner">
 <img src="assets/images/TFTSwatermark1.png" alt="TFTS">
 <div class="tooltip">Keep an eye out! Thing's are not what they seem!
@@ -2099,6 +2100,7 @@ setInterval(makeConfetti, 150);
 </footer>
 
 <!-- MOBILE DROPDOWN -->
+
  <script>
 const hamburger = document.getElementById('hamburger');
 const navLinks = document.getElementById('navLinks');
@@ -2107,7 +2109,9 @@ hamburger.addEventListener('click', () => {
   navLinks.classList.toggle('nav-open');
 });
 </script>
-    <!-- LIGHTBOX -->
+
+<!-- LIGHTBOX -->
+
 <div class="lightbox" id="lightbox">
   <button class="lightbox-close" id="lightboxClose">×</button>
   <img src="" alt="" id="lightboxImg">
@@ -2123,311 +2127,249 @@ hamburger.addEventListener('click', () => {
     <p class="char-popup-text" id="charPopupText"></p>
   </div>
 </div>
+<!-- Switching image Arrows --> 
+<script>
+  const lightRight = document.getElementById('lightright');
+const lightLeft = document.getElementById('lightleft');
+  const images = ["assets/images/magicianbodysheet1.png",
+  "assets/images/magician2.png",
+  "assets/images/magician3.png"];
+  const rightArrow = document.querySelector('.char-card-img .right');
+const leftArrow = document.querySelector('.char-card-img .left');
+const someImage = document.querySelector('.char-card-img img');
+  let currentIndex = 0;
 
+rightArrow.addEventListener('click', () => {
+currentIndex = currentIndex + 1;
+
+if (currentIndex > images.length - 1) {
+currentIndex = images.length - 1;
+}
+
+someImage.src = images[currentIndex];
+});
+leftArrow.addEventListener('click', () => {
+currentIndex = currentIndex - 1;
+
+if (currentIndex < 0) {
+currentIndex = 0;
+}
+
+someImage.src = images[currentIndex];
+});
+lightLeft.addEventListener('click', () => {
+const imgs = JSON.parse(lightbox.dataset.images);
+let index = Number(lightbox.dataset.index);
+
+index = index - 1;
+
+if (index < 0) {
+index = 0;
+}
+
+lightboxImg.src = imgs[index];
+lightbox.dataset.index = index;
+});
+lightRight.addEventListener('click', () => {
+const imgs = JSON.parse(lightbox.dataset.images);
+let index = Number(lightbox.dataset.index);
+
+index = index + 1;
+if (index > imgs.length - 1) {
+index = imgs.length - 1;
+}
+
+lightboxImg.src = imgs[index];
+lightbox.dataset.index = index;
+});
+
+  </script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
   const btn = document.getElementById('bgColorBtn');
   const root = document.documentElement;
 
-  // background colors
-  
-  const colors = [
-    'var(--tfts-cream)', // original 
-    'var(--tfts-darkbrown)',                
-  ];
+// background colors
 
-  let currentIndex = 0;
+const colors = [
+'var(--tfts-cream)', // original
+'var(--tfts-darkbrown)',
+];
 
-  btn.addEventListener('click', () => {
-    currentIndex = (currentIndex + 1) % colors.length;
-    const newBg = colors[currentIndex];
+let currentIndex = 0;
 
-    // Apply as the root background variable
-    root.style.setProperty('--bg', newBg);
+btn.addEventListener('click', () => {
+currentIndex = (currentIndex + 1) % colors.length;
+const newBg = colors[currentIndex];
 
-    
-    document.body.style.setProperty('background', newBg);
+// Apply as the root background variable
+root.style.setProperty('--bg', newBg);
 
-   
-    btn.textContent = `🎨 Color ${currentIndex + 1}/${colors.length}`;
 
-    // Reset button text after a few seconds
-    setTimeout(() => {
-      btn.textContent = '✦ Theme';
-    }, 2000);
-  });
+document.body.style.setProperty('background', newBg);
+
+
+btn.textContent = `🎨 Color ${currentIndex + 1}/${colors.length}`;
+
+// Reset button text after a few seconds
+setTimeout(() => {
+  btn.textContent = '✦ Theme';
+}, 2000);
+
 });
-  // ── FILTERS ──
+});
+// ── FILTERS ──
 document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelector('.filter-btn.active').classList.remove('active');
-    btn.classList.add('active');
+btn.addEventListener('click', () => {
+document.querySelector('.filter-btn.active').classList.remove('active');
+btn.classList.add('active');
 
-    const filter = btn.dataset.filter;
-    document.querySelectorAll('.art-item').forEach(item => {
-      const show = filter === 'all' || item.dataset.category === filter;
-      item.classList.toggle('hidden', !show);
-    });
-  });
+const filter = btn.dataset.filter;
+document.querySelectorAll('.art-item').forEach(item => {
+  const show = filter === 'all' || item.dataset.category === filter;
+  item.classList.toggle('hidden', !show);
+});
+
+});
 });
 
 // ── LIGHTBOX (Updated to include GIF stages) ──
 // Select BOTH art items AND gif stages
-   document.querySelectorAll('.art-item, .gif-stage').forEach(item => {
-  item.addEventListener('click', () => {
-    const img = item.querySelector('img');
-    if (img) {
-      lightboxImg.src = img.src;
-      lightboxImg.alt = img.alt;
-      lightbox.dataset.images = JSON.stringify([img.src]);
-      lightbox.dataset.index = 0;
-      lightRight.classList.toggle('hide-arrow', [img.src].length <= 1);
-      lightLeft.classList.toggle('hide-arrow', [img.src].length <= 1);
-      lightbox.classList.add('open');
-    }
-  });
+document.querySelectorAll('.art-item, .gif-stage').forEach(item => {
+item.addEventListener('click', () => {
+const img = item.querySelector('img');
+if (img) {
+lightboxImg.src = img.src;
+lightboxImg.alt = img.alt;
+lightbox.dataset.images = JSON.stringify([img.src]);
+lightbox.dataset.index = 0;
+lightRight.classList.toggle('hide-arrow', [img.src].length <= 1);
+lightLeft.classList.toggle('hide-arrow', [img.src].length <= 1);
+lightbox.classList.add('open');
+}
+});
 });
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightboxImg');
 
 document.querySelectorAll('.art-item').forEach(item => {
-  item.addEventListener('click', () => {
-    const img = item.querySelector('img');
-    lightboxImg.src = img.src;
-    lightboxImg.alt = img.alt;
-    lightbox.classList.add('open');
-  });
+item.addEventListener('click', () => {
+const img = item.querySelector('img');
+lightboxImg.src = img.src;
+lightboxImg.alt = img.alt;
+lightbox.classList.add('open');
+});
 });
 
 document.getElementById('lightboxClose').addEventListener('click', () => {
-  lightbox.classList.remove('open');
+lightbox.classList.remove('open');
 });
 lightbox.addEventListener('click', e => {
-  if (e.target === lightbox) lightbox.classList.remove('open');
+if (e.target === lightbox) lightbox.classList.remove('open');
 });
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') lightbox.classList.remove('open');
+if (e.key === 'Escape') lightbox.classList.remove('open');
 });
-    document.querySelectorAll('.char-card-img').forEach(el => {
-  el.addEventListener('click', () => {
-    const img = el.querySelector('img');
-    lightboxImg.src = img.src;
-    lightboxImg.alt = img.alt;
-    lightbox.dataset.images = JSON.stringify(images);
-    lightbox.dataset.index = currentIndex;
-    lightbox.classList.add('open');
-  });
+document.querySelectorAll('.char-card-img').forEach(el => {
+el.addEventListener('click', () => {
+const img = el.querySelector('img');
+lightboxImg.src = img.src;
+lightboxImg.alt = img.alt;
+lightbox.dataset.images = JSON.stringify(images);
+lightbox.dataset.index = currentIndex;
+lightbox.classList.add('open');
 });
-   // ── THEATRE BOX FALLBACK LOGIC ──
+});
+// ── THEATRE BOX FALLBACK LOGIC ──
 document.addEventListener('DOMContentLoaded', () => {
-  const videoWrapper = document.getElementById('videoWrapper');
-  const imageFallback = document.getElementById('imageFallback');
-  const iframe = document.getElementById('mainVideo');
-  
-  // Get the actual src
-  const videoUrl = iframe.getAttribute('src');
-  
-  // If src is empty or not a real video URL → show fallback
- if (!videoUrl || videoUrl.trim() === '' || videoUrl === 'https://www.youtube.com') {
-    if (videoWrapper) videoWrapper.style.display = 'none';
-    if (imageFallback) imageFallback.style.display = 'block';
-  } else {
-    if (videoWrapper) videoWrapper.style.display = 'block';
-    if (imageFallback) imageFallback.style.display = 'none';
-    
-    // Optional: Handle iframe error
-    iframe.addEventListener('error', () => {
-      videoWrapper.style.display = 'none';
-      imageFallback.style.display = 'block';
-    });
-  }
+const videoWrapper = document.getElementById('videoWrapper');
+const imageFallback = document.getElementById('imageFallback');
+const iframe = document.getElementById('mainVideo');
+
+// Get the actual src
+const videoUrl = iframe.getAttribute('src');
+
+// If src is empty or not a real video URL → show fallback
+if (!videoUrl || videoUrl.trim() === '' || videoUrl === 'https://www.youtube.com') {
+if (videoWrapper) videoWrapper.style.display = 'none';
+if (imageFallback) imageFallback.style.display = 'block';
+} else {
+if (videoWrapper) videoWrapper.style.display = 'block';
+if (imageFallback) imageFallback.style.display = 'none';
+
+// Optional: Handle iframe error
+iframe.addEventListener('error', () => {
+  videoWrapper.style.display = 'none';
+  imageFallback.style.display = 'block';
 });
-    document.querySelectorAll('.char-card-img').forEach(el => {
-  el.addEventListener('click', () => {
-    const img = el.querySelector('img');
-    lightboxImg.src = img.src;
-    lightboxImg.alt = img.alt;
-    lightbox.classList.add('open');
-  });
+
+}
 });
-   // ── CHARACTER DETAILS POPUP ──
+document.querySelectorAll('.char-card-img').forEach(el => {
+el.addEventListener('click', () => {
+const img = el.querySelector('img');
+lightboxImg.src = img.src;
+lightboxImg.alt = img.alt;
+lightbox.classList.add('open');
+});
+});
+// ── CHARACTER DETAILS POPUP ──
 const charPopup = document.getElementById('charPopup');
 const charPopupTitle = document.getElementById('charPopupTitle');
 const charPopupText = document.getElementById('charPopupText');
 const charPopupImg = document.getElementById('charPopupImg');
 
 const charData = {
-  magician: {
-    name: "Magician",
-    text: "<b>Height:</b> 5'9<br><b>Age:</b> 32<br><b>Pronouns:</b> He/Him<br><b>Ethnicity:</b> Polynesian<br><b>Short Description:</b> He's bold, he's proud, and he's confident. Diving into any bet head first with no hesistation, he knows he'll win. No matter the cost. That's how he got this far, there's no way he can lose now.",
-    img: "assets/images/magicianemoji2.png"
-  },
-  ringmaster: {
-    name: "RingMaster",
-    text: "<b>Height:</b> 5'7<br><b>Age:</b> 37<br><b>Pronouns:</b> He/Him<br><b>Ethnicity:</b> Hispanic<br><b>Short Description:</b> RingMaster is a bold and snarky man. With an ego so high it's light years away. With his narcissistic personality he leads the crew around. Essentially in charge of the whole show?",
-    img: "assets/images/ringmasterchibi2.png"
-  },
-  cindy: {
-    name: "Cindy Drift-Tastic",
-    text: "<b>Height:</b> 5’5<br><b>Age:</b> 23<br><b>Pronouns:</b> She/He<br><b>Ethnicity:</b> Caucasian<br><b>Short Description:</b> This bratty go-kart director takes up the whole room with just her personality. While she may play nice infront of you, she'll comment about your outfit with the others later. Just because she looks approachable, doesn't mean she is. Ask <b>Lily</b>.",
-    img: "assets/images/cindyemoji2.png"
-  }
+magician: {
+name: "Magician",
+text: "<b>Height:</b> 5'9<br><b>Age:</b> 32<br><b>Pronouns:</b> He/Him<br><b>Ethnicity:</b> Polynesian<br><b>Short Description:</b> He's bold, he's proud, and he's confident. Diving into any bet head first with no hesistation, he knows he'll win. No matter the cost. That's how he got this far, there's no way he can lose now.",
+img: "assets/images/magicianemoji2.png"
+},
+ringmaster: {
+name: "RingMaster",
+text: "<b>Height:</b> 5'7<br><b>Age:</b> 37<br><b>Pronouns:</b> He/Him<br><b>Ethnicity:</b> Hispanic<br><b>Short Description:</b> RingMaster is a bold and snarky man. With an ego so high it's light years away. With his narcissistic personality he leads the crew around. Essentially in charge of the whole show?",
+img: "assets/images/ringmasterchibi2.png"
+},
+cindy: {
+name: "Cindy Drift-Tastic",
+text: "<b>Height:</b> 5’5<br><b>Age:</b> 23<br><b>Pronouns:</b> She/He<br><b>Ethnicity:</b> Caucasian<br><b>Short Description:</b> This bratty go-kart director takes up the whole room with just her personality. While she may play nice infront of you, she'll comment about your outfit with the others later. Just because she looks approachable, doesn't mean she is. Ask <b>Lily</b>.",
+img: "assets/images/cindyemoji2.png"
+}
 };
 
 document.querySelectorAll('.char-details-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const data = charData[btn.dataset.char];
-    if (!data) return;
-    
-    charPopupTitle.textContent = data.name;
-    charPopupText.innerHTML = data.text;  
-    charPopupImg.src = data.img;
-    charPopupImg.alt = data.name;
-    
-    charPopup.classList.add('open');
-  });
+btn.addEventListener('click', () => {
+const data = charData[btn.dataset.char];
+if (!data) return;
+
+charPopupTitle.textContent = data.name;
+charPopupText.innerHTML = data.text;  
+charPopupImg.src = data.img;
+charPopupImg.alt = data.name;
+
+charPopup.classList.add('open');
+
+});
 });
 
 document.getElementById('charPopupClose').addEventListener('click', () => {
-  charPopup.classList.remove('open');
+charPopup.classList.remove('open');
 });
 
 charPopup.addEventListener('click', e => {
-  if (e.target === charPopup) charPopup.classList.remove('open');
+if (e.target === charPopup) charPopup.classList.remove('open');
 });
 
-  </script>
-<!-- CHARACTER IMAGE SLIDESHOW + ZOOM -->
-<script>
-
-document.querySelectorAll('.char-card-img').forEach(card => {
-
-    const img = card.querySelector('img');
-    const rightArrow = card.querySelector('.right');
-    const leftArrow = card.querySelector('.left');
-
-    const images = JSON.parse(card.dataset.images);
-
-    let currentIndex = 0;
-
-
-    /* =========================
-       RIGHT ARROW
-    ========================= */
-
-    rightArrow.addEventListener('click', function(e) {
-
-        e.stopPropagation();
-
-        currentIndex++;
-
-        if (currentIndex >= images.length) {
-            currentIndex = 0;
-        }
-
-        img.src = images[currentIndex];
-
-    });
-
-
-    /* =========================
-       LEFT ARROW
-    ========================= */
-
-    leftArrow.addEventListener('click', function(e) {
-
-        e.stopPropagation();
-
-        currentIndex--;
-
-        if (currentIndex < 0) {
-            currentIndex = images.length - 1;
-        }
-
-        img.src = images[currentIndex];
-
-    });
-
-
-    /* =========================
-       CLICK IMAGE TO ZOOM
-    ========================= */
-
-    card.addEventListener('click', function(e) {
-
-       
-        if (
-            e.target === rightArrow ||
-            e.target === leftArrow
-        ) {
-            return;
-        }
-
-        lightboxImg.src = img.src;
-        lightboxImg.alt = img.alt;
-
-        
-        lightbox.dataset.images = JSON.stringify(images);
-
-      
-        lightbox.dataset.index = currentIndex;
-
-    
-        lightRight.classList.remove('hide-arrow');
-        lightLeft.classList.remove('hide-arrow');
-
-        lightbox.classList.add('open');
-
-    });
-
+// ── ZOOM CHARACTER IMAGES USING EXISTING LIGHTBOX ──
+document.querySelectorAll('.char-card-img').forEach(el => {
+el.addEventListener('click', () => {
+const img = el.querySelector('img');
+lightboxImg.src = img.src;
+lightboxImg.alt = img.alt;
+lightbox.classList.add('open');
 });
-
-
-/* =========================
-   LIGHTBOX ARROWS
-========================= */
-
-lightRight.addEventListener('click', function(e) {
-
-    e.stopPropagation();
-
-    const images = JSON.parse(lightbox.dataset.images);
-
-    let index = Number(lightbox.dataset.index);
-
-    index++;
-
-    if (index >= images.length) {
-        index = 0;
-    }
-
-    lightboxImg.src = images[index];
-
-    lightbox.dataset.index = index;
-
 });
-
-
-lightLeft.addEventListener('click', function(e) {
-
-    e.stopPropagation();
-
-    const images = JSON.parse(lightbox.dataset.images);
-
-    let index = Number(lightbox.dataset.index);
-
-    index--;
-
-    if (index < 0) {
-        index = images.length - 1;
-    }
-
-    lightboxImg.src = images[index];
-
-    lightbox.dataset.index = index;
-
-});
-
 </script>
+
 </body>
 </html>
