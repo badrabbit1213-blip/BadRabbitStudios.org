@@ -2336,14 +2336,33 @@ charPopup.addEventListener('click', e => {
 });
 
 
-// ── ZOOM CHARACTER IMAGES USING EXISTING LIGHTBOX ──
-document.querySelectorAll('.char-card-img').forEach(el => {
-  el.addEventListener('click', () => {
-    const img = el.querySelector('img');
+// ── ZOOM CHARACTER IMAGES ──
+document.querySelectorAll('.char-card-img').forEach(card => {
+
+  card.addEventListener('click', (e) => {
+
+   
+    if (e.target.classList.contains('left') ||
+        e.target.classList.contains('right')) {
+      return;
+    }
+
+    const img = card.querySelector('img');
+    const images = JSON.parse(card.dataset.images);
+
     lightboxImg.src = img.src;
     lightboxImg.alt = img.alt;
+
+   
+    lightbox.dataset.images = JSON.stringify(images);
+
+    
+    const currentIndex = images.indexOf(img.src);
+    lightbox.dataset.index = currentIndex >= 0 ? currentIndex : 0;
+
     lightbox.classList.add('open');
   });
+
 });
     </script>
 </body>
