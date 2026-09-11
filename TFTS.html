@@ -1205,17 +1205,13 @@ nav {
 ════════════════════════════════════════ */
 .char-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(550px, 1fr)); 
-  gap: 24px;
+  grid-template-columns: 1fr;  
   max-width: 1400px;
   margin: 0 auto;
 }
 
-
 @media (min-width: 900px) {
-  .char-grid {
-    grid-template-columns: 1fr 1fr;
-  }
+  .char-grid { grid-template-columns: 1fr 1fr; }
 }
 
 
@@ -1517,7 +1513,7 @@ text-shadow: 0 0 6px #e67715;
   position: fixed;
   bottom: 0;
   right: 20px;
-  z-index: 999;
+  z-index: 9999;
   width: 120px;
   cursor: pointer;
 }
