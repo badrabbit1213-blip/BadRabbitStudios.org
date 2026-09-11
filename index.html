@@ -573,7 +573,13 @@ text-shadow: 0 0 6px #ff70f3;
   </a>
   <ul class="nav-links" id="navLinks">
     <li><a href="index.html" class="active">Home</a></li>
-    <li><a href="shows.html">Shows</a></li>
+     <li class="dropdown">
+      <a href="#">Shows ▾</a>
+      <ul class="dropdown-menu">
+        <li><a href="TFTS.html">The FunTime Show</a></li>
+        <li><a href="CC.html">Cannibal Charlie</a></li>
+      </ul>
+    </li>
     <li class="dropdown">
       <a href="#">About ▾</a>
       <ul class="dropdown-menu">
@@ -613,9 +619,11 @@ text-shadow: 0 0 6px #ff70f3;
       <span class="show-badge">🎪 Coming Soon</span>
       <h3 class="show-title">The FunTime Show</h3>
       <p class="show-desc">A German detective wannabe unravels the dark secrets of a strange circus. Nothing here is what it seems — and neither is anyone in it.</p>
-      <a href="#support" class="btn btn-primary">Follow Development</a>
+      <a href="TFTS.html" class="btn btn-primary">Follow Development</a>
     </div>
-    <div class="show-image">[ Poster Coming Soon ]</div>
+    <div class="show-image">
+      <img src="assets/images/TFTSwatermark1.png">
+    </div>
   </div>
 </section>
  
@@ -652,7 +660,6 @@ text-shadow: 0 0 6px #ff70f3;
   <div class="section-line"></div>
   <p class="support-desc">BadRabbit Studios runs on community support. Every contribution goes directly into making The FunTime Show and the studio a reality.</p>
   <div class="hero-buttons">
-    <a href="https://patreon.com/OfficialBadRabbit?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink" class="btn btn-primary">Join on Patreon</a>
     <a href="https://www.youtube.com/@badrabbit_" class="btn btn-secondary">YouTube</a>
   </div>
 </div>
@@ -686,3 +693,4 @@ hamburger.addEventListener('click', () => {
 </script>
 </body>
 </html>
+
