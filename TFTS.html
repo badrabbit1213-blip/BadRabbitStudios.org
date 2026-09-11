@@ -2019,7 +2019,7 @@ setInterval(makeConfetti, 150);
     <img src="assets/images/stage1.gif" alt="Stage 1: Scripting" loading="lazy">
     <div class="stage-caption">
       <h4>Scripting & Storyboard</h4>
-      <p>Drafting the narrative and mapping scenes/p>
+      <p>Drafting the narrative and mapping scenes</p>
     </div>
   </div>
 
@@ -2139,63 +2139,7 @@ hamburger.addEventListener('click', () => {
     <p class="char-popup-text" id="charPopupText"></p>
   </div>
 </div>
-<!-- Switching image Arrows --> 
-<script>
-  const lightRight = document.getElementById('lightright');
-const lightLeft = document.getElementById('lightleft');
-  const images = ["assets/images/magicianbodysheet1.png",
-  "assets/images/magician2.png",
-  "assets/images/magician3.png"];
-  const rightArrow = document.querySelector('.char-card-img .right');
-const leftArrow = document.querySelector('.char-card-img .left');
-const someImage = document.querySelector('.char-card-img img');
-  let currentIndex = 0;
 
-rightArrow.addEventListener('click', () => {
-currentIndex = currentIndex + 1;
-
-if (currentIndex > images.length - 1) {
-currentIndex = images.length - 1;
-}
-
-someImage.src = images[currentIndex];
-});
-leftArrow.addEventListener('click', () => {
-currentIndex = currentIndex - 1;
-
-if (currentIndex < 0) {
-currentIndex = 0;
-}
-
-someImage.src = images[currentIndex];
-});
-lightLeft.addEventListener('click', () => {
-const imgs = JSON.parse(lightbox.dataset.images);
-let index = Number(lightbox.dataset.index);
-
-index = index - 1;
-
-if (index < 0) {
-index = 0;
-}
-
-lightboxImg.src = imgs[index];
-lightbox.dataset.index = index;
-});
-lightRight.addEventListener('click', () => {
-const imgs = JSON.parse(lightbox.dataset.images);
-let index = Number(lightbox.dataset.index);
-
-index = index + 1;
-if (index > imgs.length - 1) {
-index = imgs.length - 1;
-}
-
-lightboxImg.src = imgs[index];
-lightbox.dataset.index = index;
-});
-
-  </script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
   const btn = document.getElementById('bgColorBtn');
@@ -2263,15 +2207,9 @@ lightbox.classList.add('open');
 });
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightboxImg');
+const lightRight = document.getElementById('lightright');
+const lightLeft = document.getElementById('lightleft');
 
-document.querySelectorAll('.art-item').forEach(item => {
-item.addEventListener('click', () => {
-const img = item.querySelector('img');
-lightboxImg.src = img.src;
-lightboxImg.alt = img.alt;
-lightbox.classList.add('open');
-});
-});
 
 document.getElementById('lightboxClose').addEventListener('click', () => {
 lightbox.classList.remove('open');
@@ -2282,15 +2220,20 @@ if (e.target === lightbox) lightbox.classList.remove('open');
 document.addEventListener('keydown', e => {
 if (e.key === 'Escape') lightbox.classList.remove('open');
 });
-document.querySelectorAll('.char-card-img').forEach(el => {
-el.addEventListener('click', () => {
-const img = el.querySelector('img');
-lightboxImg.src = img.src;
-lightboxImg.alt = img.alt;
-lightbox.dataset.images = JSON.stringify(images);
-lightbox.dataset.index = currentIndex;
-lightbox.classList.add('open');
+lightLeft.addEventListener('click', () => {
+  const imgs = JSON.parse(lightbox.dataset.images || '[]');
+  let index = Number(lightbox.dataset.index);
+  index = Math.max(0, index - 1);
+  lightboxImg.src = imgs[index];
+  lightbox.dataset.index = index;
 });
+
+lightRight.addEventListener('click', () => {
+  const imgs = JSON.parse(lightbox.dataset.images || '[]');
+  let index = Number(lightbox.dataset.index);
+  index = Math.min(imgs.length - 1, index + 1);
+  lightboxImg.src = imgs[index];
+  lightbox.dataset.index = index;
 });
 // ── THEATRE BOX FALLBACK LOGIC ──
 document.addEventListener('DOMContentLoaded', () => {
@@ -2317,14 +2260,7 @@ iframe.addEventListener('error', () => {
 
 }
 });
-document.querySelectorAll('.char-card-img').forEach(el => {
-el.addEventListener('click', () => {
-const img = el.querySelector('img');
-lightboxImg.src = img.src;
-lightboxImg.alt = img.alt;
-lightbox.classList.add('open');
-});
-});
+
 // ── CHARACTER DETAILS POPUP ──
 const charPopup = document.getElementById('charPopup');
 const charPopupTitle = document.getElementById('charPopupTitle');
@@ -2372,16 +2308,39 @@ charPopup.addEventListener('click', e => {
 if (e.target === charPopup) charPopup.classList.remove('open');
 });
 
-// ── ZOOM CHARACTER IMAGES USING EXISTING LIGHTBOX ──
-document.querySelectorAll('.char-card-img').forEach(el => {
-el.addEventListener('click', () => {
-const img = el.querySelector('img');
-lightboxImg.src = img.src;
-lightboxImg.alt = img.alt;
-lightbox.classList.add('open');
-});
-});
-</script>
+// ── PER-CARD INLINE ARROWS + ZOOM 
+document.querySelectorAll('.char-card-img').forEach(card => {
+  const imgEl = card.querySelector('img');
+  const images = JSON.parse(card.dataset.images || '[]');
+  let index = 0;
 
+  const rightBtn = card.querySelector('.right');
+  const leftBtn = card.querySelector('.left');
+
+  function showInline(i) {
+    index = Math.max(0, Math.min(images.length - 1, i));
+    imgEl.src = images[index];
+  }
+
+  if (rightBtn) rightBtn.addEventListener('click', e => {
+    e.stopPropagation(); 
+    showInline(index + 1);
+  });
+  if (leftBtn) leftBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    showInline(index - 1);
+  });
+
+  card.addEventListener('click', () => {
+    lightboxImg.src = images[index];
+    lightboxImg.alt = imgEl.alt;
+    lightbox.dataset.images = JSON.stringify(images);
+    lightbox.dataset.index = index;
+    lightRight.classList.toggle('hide-arrow', images.length <= 1);
+    lightLeft.classList.toggle('hide-arrow', images.length <= 1);
+    lightbox.classList.add('open');
+  });
+});
+  </script>
 </body>
 </html>
